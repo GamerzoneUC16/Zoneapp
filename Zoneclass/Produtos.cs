@@ -40,7 +40,9 @@ namespace Zoneclass
             Resumo = resumo;
             Preco = preco;
             Desconto = desconto;
-            Descontinuado = descontinuado;
+            Image= image;
+            Destaque = destaque;
+            Desconto = desconto;
         }
 
         // Métodos da classe
@@ -48,8 +50,8 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "insert produtos (descricao, unidade, codbar, preco, desconto, descontinuado) " +
-                "values ('" + Descricao + "','" + Unidade + "','" + CodBar + "'," + Preco + "," + Desconto + ",0)";
+            cmd.CommandText = "insert produtos (titulo, descricao, resumo, preco, image, destaque, desconto) " +
+                "values ('" + Titulo + "','" + Descricao + "','" + Resumo + "'," + Preco + "," + Image + "," + Destaque + "," + Desconto + ")";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
@@ -71,8 +73,9 @@ namespace Zoneclass
                     dr.GetString(2),
                     dr.GetString(3),
                     dr.GetDouble(4),
-                    dr.GetDouble(5),
-                    dr.GetBoolean(6)
+                    dr.GetString(5),
+                    dr.GetString(6),
+                    dr.GetDouble(7)
                     )
                 );
             }
@@ -89,12 +92,13 @@ namespace Zoneclass
             while (dr.Read())
             {
                 produto.Id = dr.GetInt32(0);
-                produto.Descricao = dr.GetString(1);
-                produto.Unidade = dr.GetString(2);
-                produto.CodBar = dr.GetString(3);
+                produto.Titulo = dr.GetString(1);
+                produto.Descricao = dr.GetString(2);
+                produto.Resumo = dr.GetString(3);
                 produto.Preco = dr.GetDouble(4);
-                produto.Desconto = dr.GetDouble(5);
-                produto.Descontinuado = dr.GetBoolean(6);
+                produto.Image = dr.GetString(5);
+                produto.Destaque = dr.GetString(6);
+                produto.Desconto = dr.GetDouble(7);
             }
 
             return produto;
@@ -103,8 +107,8 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "update produtos set descricao = '" + Descricao + "'," +
-                "unidade = '" + Unidade + "', codbar = '" + CodBar + "', preco = " + Preco + ", desconto = " + Desconto + " , descontinuado = " + Descontinuado + " " +
+            cmd.CommandText = "update produtos set titulo = '" + Titulo + "'," +
+                "descricao = '" + Descricao + "', resumo = '" + Resumo + "', preco = " + Preco + ", image = " + Image + " , destaque = " + Destaque + " " + " , desconto = " + Desconto +
                 "where id = " + Id;
             cmd.ExecuteReader();
         }
@@ -128,7 +132,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from produtos where descricao like '%" + _parte + "%' order by nome;";
+            cmd.CommandText = "select * from produtos where titulo like '%" + _parte + "%' order by nome;";
             var dr = cmd.ExecuteReader();
             List<Produto> lista = new List<Produto>();
             while (dr.Read())
@@ -139,8 +143,9 @@ namespace Zoneclass
                 dr.GetString(2),
                 dr.GetString(3),
                 dr.GetDouble(4),
-                dr.GetDouble(5),
-                dr.GetBoolean(6)
+                dr.GetString(5),
+                dr.GetString(6),
+                dr.GetDouble(7)
                     )
                 );
             }
