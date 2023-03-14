@@ -3,10 +3,78 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zoneclass;
 
 namespace Zoneclass
 {
-    internal class Enderecos
+    public class Endereco
     {
+        public int Id { get; set; }
+        public string Logradouro { get; set; }
+        public string Numero { get; set; }
+        public string Bairro { get; set; }
+        public string Cidade { get; set; }
+        public string Uf { get; set; }
+        public string Cep { get; set; }
+        public string Complemento { get; set; }
+        public string Tipo { get; set; }
+        public Endereco() { }
+
+        public Endereco(int id, string logradouro, string numero, string bairro, string cidade, string uf, string cep, string complemento, string tipo)
+        {
+            Id = id;
+            Logradouro = logradouro;
+            Numero = numero;
+            Bairro = bairro;
+            Cidade = cidade;
+            Uf = uf;
+            Cep = cep;                       
+            Complemento = complemento;           
+            Tipo = tipo;
+        }
+        public Endereco(string logradouro, string numero, string bairro, string cidade, string uf, string cep, string complemento, string tipo)
+        {
+            Logradouro = logradouro;
+            Numero = numero;
+            Bairro = bairro;
+            Cidade = cidade;
+            Uf = uf;
+            Cep = cep;      
+            Complemento = complemento;
+            Tipo = tipo;
+        }
+        public void Inserir(int cliente_id)
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandText = "insert Enderecos (cliente_id, logradouro, numero, bairro, cidade, uf, cep, complemento, tipo) " +
+                "values (" + cliente_id + "'" + Logradouro + "', '" + Numero + "','" + Bairro + "','" + Cidade + "','" + Uf + "','" + Cep + "','" + Complemento + "','" + Tipo + "')";
+            cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
+        }
+        public static List<Endereco> ListarPorCliente(int cliente_id)
+        {
+            List<Endereco> listaEnd = new List<Endereco>();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = "select id, numero, tipo from Enderecos where cliente_id = " + cliente_id;
+            var dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                listaEnd.Add(new Endereco(
+                            dr.GetInt32(0),
+                            dr.GetString(1),
+                            dr.GetString(2),
+                            dr.GetString(3),
+                            dr.GetString(4),
+                            dr.GetString(5),
+                            dr.GetString(6),
+                            dr.GetString(7),
+                            dr.GetString(8),
+                            dr.GetString(9)
+                        )
+
+                    );
+            }
+            return listaEnd;
+        }
     }
 }
