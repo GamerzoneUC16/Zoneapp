@@ -12,58 +12,42 @@ namespace Zoneclass
     public class Pedido
     {
         public int Id { get; set; }
-        public DateTime Data { get; set; }
-        public string Status { get; set; }
+        public double Preco { get; set; }
         public double Desconto { get; set; }
         public Cliente Cliente { get; set; }
-        public Usuario Usuario { get; set; }
-        public DateTime ArquivadoEm { get; set; }
         public List<ItemPedido> Itens { get; set; }
-        public string Hashcode { get; set; }
 
         public Pedido()
         {
-            Usuario = new Usuario();
             Cliente = new Cliente();
             Itens = new List<ItemPedido>();
         }
 
-        public Pedido(Cliente cliente, Usuario usuario)
+        public Pedido(Cliente cliente)
         {
-            Data = new DateTime();
-            Status = "A";
             Desconto = 0;
             Cliente = cliente;
-            Usuario = usuario;
         }
 
-        public Pedido(int id, string hashcode, DateTime data, string status, double desconto, Cliente cliente, Usuario usuario, DateTime arquivadoEm, List<ItemPedido> itens = null)
+        public Pedido(int id, double preco, double desconto, Cliente cliente, List<ItemPedido> itens = null)
         {
             Id = id;
-            Data = data;
-            Status = status;
+            Preco = preco;
             Desconto = desconto;
             Cliente = cliente;
-            Usuario = usuario;
             Itens = itens;
-            Hashcode = hashcode;
-            ArquivadoEm = arquivadoEm;
         }
         public void Inserir()
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = "insert pedidos (data, status, desconto, cliente_id, usuario_id)" +
-                              "values(default, default, 0, @client, @user);";
+            cmd.CommandText = "insert pedidos (preco, desconto, cliente_id)" +
+                              "values(preco, 0, @client);";
 
             cmd.Parameters.Add("@client", MySqlDbType.Int32).Value = Cliente.Id;
-            cmd.Parameters.Add("@user", MySqlDbType.Int32).Value = Usuario.Id;
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
             Random rand = new Random();
-            string hash = "P" + Id + rand.Next(10001, 99999);
-            Hashcode = hash;
-            cmd.CommandText = "update pedidos set hashcode = '" + hash + "' where id =" + Id;
             cmd.ExecuteNonQuery();
         }
         public static List<Pedido> Listar(int a = 0)
@@ -76,14 +60,10 @@ namespace Zoneclass
             {
                 list.Add(new Pedido(
                     dr.GetInt32(0),
-                    dr.GetString(7),
-                    dr.GetDateTime(1),
-                    dr.GetString(2),
-                    dr.GetDouble(3),
-                    Cliente.ObterPorId(dr.GetInt32(4)),
-                    Usuario.ObterPorId(dr.GetInt32(5)),
-                    dr.GetDateTime(6),
-                    ItemPedido.Listar(dr.GetInt32(0))
+                    dr.GetDouble(1),
+                    dr.GetDouble(2),
+                    Cliente.ObterPorId(dr.GetInt32(3)),
+                    ItemPedido.Listar(dr.GetInt32(4))
                     )
                     );
             }
@@ -99,15 +79,10 @@ namespace Zoneclass
             {
                 list.Add(new Pedido(
                     dr.GetInt32(0),
-                    dr.GetString(7),
-                    dr.GetDateTime(1),
-                    dr.GetString(2),
-                    dr.GetDouble(3),
-                    Cliente.ObterPorId(dr.GetInt32(4)),
-                    Usuario.ObterPorId(dr.GetInt32(5)),
-                    dr.GetDateTime(6),
-                    ItemPedido.Listar(dr.GetInt32(0))
-
+                    dr.GetDouble(1),
+                    dr.GetDouble(2),
+                    Cliente.ObterPorId(dr.GetInt32(3)),
+                    ItemPedido.Listar(dr.GetInt32(4))
                     )
                     );
             }
@@ -122,14 +97,10 @@ namespace Zoneclass
             while (dr.Read())
             {
                 pedido.Id = dr.GetInt32(0);
-                pedido.Hashcode = dr.GetString(7);
-                pedido.Data = dr.GetDateTime(1);
-                pedido.Status = dr.GetString(2);
-                pedido.Desconto = dr.GetDouble(3);
-                pedido.Cliente = Cliente.ObterPorId(dr.GetInt32(4));
-                pedido.Usuario = Usuario.ObterPorId(dr.GetInt32(5));
-                pedido.ArquivadoEm = dr.GetDateTime(6);
-                pedido.Itens = ItemPedido.Listar(dr.GetInt32(0));
+                pedido.Preco = dr.GetDouble(1);
+                pedido.Desconto = dr.GetDouble(2);
+                pedido.Cliente = Cliente.ObterPorId(dr.GetInt32(3));            
+                pedido.Itens = ItemPedido.Listar(dr.GetInt32(4));
             }
 
             return pedido;
@@ -137,10 +108,10 @@ namespace Zoneclass
         public void Atualizar()
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = "update pedidos set status = @status, desconto = @desconto where id = @id; ";
+            cmd.CommandText = "update pedidos set status = @preco, desconto = @desconto where id = @id; ";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@id", Id);
-            cmd.Parameters.AddWithValue("@status", Status);
+            cmd.Parameters.AddWithValue("@preco", Preco);
             cmd.Parameters.AddWithValue("@desconto", Desconto);
             cmd.ExecuteNonQuery();
         }

@@ -12,34 +12,34 @@ namespace Zoneclass
     public class ItemPedido
     {
         public int Id { get; set; }
-        public Produto Produto { get; set; }
-        public double Preco { get; set; }
         public double Quantidade { get; set; }
+        public double Preco { get; set; }
         public double Desconto { get; set; }
-
+        public Produto Produto { get; set; }
+        
         public ItemPedido() { }
-        public ItemPedido(Produto produto, double preco, double quantidade, double desconto)
+        public ItemPedido(double quantidade, double preco, double desconto, Produto produto)
         {
-            Produto = produto;
-            Preco = preco;
             Quantidade = quantidade;
+            Preco = preco;
             Desconto = desconto;
+            Produto = produto;   
         }
-        public ItemPedido(int id, Produto produto, double quantidade, double desconto)
+        public ItemPedido(int id, double quantidade, double desconto, Produto produto)
         {
             Id = id;
-            Produto = produto;
+            Quantidade = quantidade;
             Preco = Produto.Preco;
-            Quantidade = quantidade;
             Desconto = desconto;
+            Produto = produto;  
         }
-        public ItemPedido(int id, Produto produto, double preco, double quantidade, double desconto)
+        public ItemPedido(int id, double quantidade, double preco, double desconto, Produto produto)
         {
             Id = id;
-            Produto = produto;
-            Preco = preco;
             Quantidade = quantidade;
+            Preco = preco;
             Desconto = desconto;
+            Produto = produto;
         }
         public static List<ItemPedido> Listar(int pedido_id)
         {
@@ -51,10 +51,10 @@ namespace Zoneclass
             {
                 itens.Add(new ItemPedido(
                     dr.GetInt32(0),
-                    Produto.ObterPorId(dr.GetInt32(2)),
+                    dr.GetDouble(1),
+                    dr.GetDouble(2),
                     dr.GetDouble(3),
-                    dr.GetDouble(4),
-                    dr.GetDouble(5)
+                    Produto.ObterPorId(dr.GetInt32(4))
                     ));
             }
             return itens;
@@ -68,24 +68,24 @@ namespace Zoneclass
             while (dr.Read())
             {
                 iten.Id = dr.GetInt32(0);
-                iten.Produto = Produto.ObterPorId(dr.GetInt32(2));
-                iten.Preco = dr.GetDouble(3);
-                iten.Quantidade = dr.GetDouble(4);
-                iten.Desconto = dr.GetDouble(5);
+                iten.Quantidade = dr.GetDouble(1);
+                iten.Preco = dr.GetDouble(2);
+                iten.Desconto = dr.GetDouble(3);
+                iten.Produto = Produto.ObterPorId(dr.GetInt32(4)); 
             }
             return iten;
         }
         public void Adicionar()
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = "insert itempedido (pedido_id, produto_id, preco, quantidade, desconto)" +
-                " values (@pedido_id, @produto_id, @preco, @quantidade, @desconto)";
+            cmd.CommandText = "insert itempedido (pedido_id, quantidade, preco, desconto, produto_id)" +
+                " values (@pedido_id, @quantidade, @preco, @desconto, @produto_id)";
             cmd.Parameters.Clear();
             cmd.Parameters.Add("@pedido_id", MySqlDbType.Int32).Value = Id;
-            cmd.Parameters.Add("@produto_id", MySqlDbType.Int32).Value = Produto.Id;
-            cmd.Parameters.Add("@preco", MySqlDbType.Decimal).Value = Produto.Preco;
             cmd.Parameters.Add("@quantidade", MySqlDbType.Decimal).Value = Quantidade;
+            cmd.Parameters.Add("@preco", MySqlDbType.Decimal).Value = Produto.Preco;
             cmd.Parameters.Add("@desconto", MySqlDbType.Decimal).Value = Desconto;
+            cmd.Parameters.Add("@produto_id", MySqlDbType.Int32).Value = Produto.Id;
             cmd.ExecuteNonQuery();
 
         }
