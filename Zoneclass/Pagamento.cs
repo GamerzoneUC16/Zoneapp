@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Zoneclass
 {
-    internal class Pagamento
+    public class Pagamento
     {
+        public int id { get; set; }
+        public DateTime data { get; set; }
+        public decimal preco { get; set; }
+        public int parcelas { get; set; }
+        public int frmpagamento_id { get; set; }
     }
+
 }

@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Zoneclass
 {
-    internal class Chamados
+    public class Chamado
     {
+        public int id { get; set; }
+        public DateTime data { get; set; }
+        public string titulo { get; set; }
+        public string assunto { get; set; }
+        public int cliente_id { get; set; }
+        public int usuario_id { get; set; }
+        public string motivo { get; set; }
+        public DateTime data_final { get; set; }
     }
+
 }

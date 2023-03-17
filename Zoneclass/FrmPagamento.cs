@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Zoneclass
 {
-    internal class FrmPagamento
+    public class FrmPagamento
     {
+        public int Id { get; set; }
+        public string Tipo { get; set; }
+        public int Cartao_Id { get; set; }
     }
+
 }
