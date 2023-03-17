@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Zoneclass
 {
-    internal class Carac_Tec
+    public class Carac_Tec
     {
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Caracs { get; set; }
+        public int Produto_Id { get; set; }
     }
+
 }

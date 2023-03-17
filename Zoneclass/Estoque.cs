@@ -8,12 +8,13 @@ namespace Zoneclass
 {
     public class Estoque
     {
-        public int id { get; set; }
-        public int quantidade { get; set; }
-        public DateTime data_entrada { get; set; }
-        public DateTime data_saida { get; set; }
-        public string lote { get; set; }
-        public int produto_id { get; set; }
+        public int Id { get; set; }
+        public int Quantidade { get; set; }
+        public DateTime Data_Entrada { get; set; }
+        public DateTime Data_Saida { get; set; }
+        public string Lote { get; set; }
+        public int Produto_Id { get; set; }
     }
+
 
 }
