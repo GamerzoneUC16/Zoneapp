@@ -15,7 +15,6 @@ namespace Zoneclass
         public string Sigla { get; set; }
         public string Rotulo { get; set; }
 
-        // Métodos constutores
         public Nivel() { }
         public Nivel(string _sigla, string _rotulo)
         {
@@ -28,11 +27,9 @@ namespace Zoneclass
             Sigla = _sigla;
             Rotulo = _rotulo;
             
-        }
-        // Métodos da classe
+        }       
         public void Inserir()
         {
-            // gravar um novo nivel na tabela niveis
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "insert niveis (nome, sigla) values ('" + Sigla + "','" + Rotulo + "')";
@@ -43,19 +40,13 @@ namespace Zoneclass
         }
         public static List<Nivel> Listar()
         {
-            // 0 - Entrega uma lista de todos os niveis  (cria um espaço do tipo lista)
-            List<Nivel> lista = new List<Nivel>();
-            // Lógica que recupera todos os niveis da tabela
-            // 1 - Abrir conexão com o banco de dados
-            var cmd = Banco.Abrir();
-            // 2 - Definir tipo de comando SQL (text/store procedure)
+            
+            List<Nivel> lista = new List<Nivel>();           
+            var cmd = Banco.Abrir();       
             cmd.CommandType = System.Data.CommandType.Text;
-            // 3 - Atribuir comando SQL
-            cmd.CommandText = "select * from niveis order by nome asc";
-            // 4 - Executar o comando sql e armazenar o retorno do banco em um objeto MySqlDataReader
-            var dr = cmd.ExecuteReader();
-            // 5 - Preencher o objeto List com o retorno do banco, se houver
-            while (dr.Read()) // enquanto houver próximo registro
+            cmd.CommandText = "select * from niveis order by nome asc";           
+            var dr = cmd.ExecuteReader();          
+            while (dr.Read())
             {
                 lista.Add(new Nivel(
                     dr.GetInt32(0),
@@ -63,8 +54,7 @@ namespace Zoneclass
                     dr.GetString(2)
                     )
                 );
-            }
-            // retorna a lista preenchida
+            }            
             return lista;
         }
         public static Nivel ObterPorId(int _id)

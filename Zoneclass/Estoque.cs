@@ -14,6 +14,25 @@ namespace Zoneclass
         public DateTime Data_Saida { get; set; }
         public string Lote { get; set; }
         public int Produto_Id { get; set; }
+        public Estoque () { }
+        public Estoque (int id, int quantidade, DateTime data_entrada, DateTime data_saida, string lote, int produto_id) 
+        {
+            Id = id;
+            Quantidade = quantidade;
+            Data_Entrada = data_entrada;
+            Data_Saida = data_saida;
+            Lote = lote;
+            Produto_Id = produto_id;
+        }
+        public Estoque (int quantidade, DateTime data_entrada, DateTime data_saida, string lote, int produto_id)
+        {
+            Quantidade = quantidade;
+            Data_Entrada = data_entrada;
+            Data_Saida = data_saida;
+            Lote = lote;
+            Produto_Id = produto_id;
+        }
+
     }
 
 

@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Banco.cs" />
     <Compile Include="Boleto.cs" />
+    <Compile Include="Carac_Tec.cs" />
     <Compile Include="Cartao.cs" />
     <Compile Include="Chamados.cs" />
     <Compile Include="Cliente.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Enderecos.cs" />
     <Compile Include="Estoque.cs" />
     <Compile Include="FrmPagamento.cs" />
+    <Compile Include="Images.cs" />
     <Compile Include="ItemPedido.cs" />
     <Compile Include="Nivel.cs" />
     <Compile Include="Pagamento.cs" />

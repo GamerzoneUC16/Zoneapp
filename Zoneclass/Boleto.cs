@@ -26,6 +26,14 @@ namespace Zoneclass
             ClienteId = clienteId;
             PedidoId = pedidoId;
         }
+        public Boleto(DateTime vencimento, decimal valor, string codigoDeBarras, int clienteId, int pedidoId) 
+        {
+            Vencimento = vencimento;
+            Valor = valor;
+            CodigoDeBarras = codigoDeBarras;
+            ClienteId = clienteId;
+            PedidoId = pedidoId;
+        }
 
         // método para calcular juros e multa caso o boleto esteja vencido
         public decimal CalcularJurosMulta()

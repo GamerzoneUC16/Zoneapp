@@ -24,7 +24,14 @@ namespace Zoneclass
             Cvv = cvv;
             Tipo = tipo;
         }
-
+        public Cartao(string numero, DateTime validade, int cvv, string tipo) 
+        {
+            Numero = numero;
+            Validade = validade;
+            Tipo = tipo;
+            Cvv = cvv;
+            Tipo = tipo;
+        }
         // método para verificar se o cartão está expirado
         public bool EstaExpirado()
         {

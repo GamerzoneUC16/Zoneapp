@@ -19,13 +19,12 @@ namespace Zoneclass
             Id = id;
             Endereco = endereco;
             ClienteId = clienteId;
-
-            Email meuEmail = new Email(1, "meuemail@email.com", 1);
-
-            Console.WriteLine($"ID do email: {meuEmail.Id}");
-            Console.WriteLine($"Endereço do email: {meuEmail.Endereco}");
-            Console.WriteLine($"ID do cliente: {meuEmail.ClienteId}");
         }
+        public Email(string endereco, int clienteId) 
+        {
+            Endereco=endereco;
+            ClienteId = clienteId;
+        }  
     }
 
 }

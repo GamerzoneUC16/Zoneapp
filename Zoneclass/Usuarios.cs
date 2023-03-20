@@ -25,8 +25,7 @@ namespace Zoneclass
             Nome = _nome;
             Login = _login;
             Senha = _senha; 
-            Nivel = _nivel;
-                     
+            Nivel = _nivel;          
         }
         public Usuario(int _id, string _nome, string _login, string _senha, Nivel _nivel)
         {
@@ -35,8 +34,6 @@ namespace Zoneclass
             Login = _login;
             Senha = _senha;
             Nivel = _nivel;
-
-
         }
         public void Inserir()
         {
@@ -115,8 +112,7 @@ namespace Zoneclass
                     dr.GetString(1),
                     dr.GetString(2),
                     dr.GetString(3),
-                    Nivel.ObterPorId(dr.GetInt32(4))));
-                   
+                    Nivel.ObterPorId(dr.GetInt32(4))));   
             }
             return lista;
         }
