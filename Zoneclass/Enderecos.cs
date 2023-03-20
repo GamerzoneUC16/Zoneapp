@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,13 +69,29 @@ namespace Zoneclass
                             dr.GetString(5),
                             dr.GetString(6),
                             dr.GetString(7),
-                            dr.GetString(8),
-                            dr.GetString(9)
+                            dr.GetString(8)                           
                         )
 
                     );
             }
             return listaEnd;
+        }
+        public static void Atualizar (Endereco endereco)
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "update enderecos set logradouro = '" +
+                endereco.Logradouro + "', cidade = '" + endereco.Cidade +
+                "' where id = " + endereco.Id;
+            cmd.ExecuteReader();
+        }
+        public bool Excluir(int id) 
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "delete from enderecos where id = " + id;
+            bool result = cmd.ExecuteNonQuery()==1?true:false;
+            return result;
         }
     }
 }

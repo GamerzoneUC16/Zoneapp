@@ -8,12 +8,10 @@ namespace Zoneclass
 {
     public class Email
     {
-        // propriedades do email
         public int Id { get; set; }
         public string Endereco { get; set; }
         public int ClienteId { get; set; }
-
-        // construtor
+        public Email() { }
         public Email(int id, string endereco, int clienteId)
         {
             Id = id;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,23 @@ namespace Zoneclass
                     );
             }
             return listaTel;
+        }
+        public static void Atualizar (Telefone telefone) 
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "update telefone set numero = '" +
+                telefone.Numero + "', tipo = '" + telefone.Tipo +
+                "'where id = " + telefone.Id;
+            cmd.ExecuteReader();
+        }
+        public bool Excluir (int id) 
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "delete from telefone where id = " + id;
+            bool result = cmd.ExecuteNonQuery()==1?true:false;
+            return result;
         }
     }
 }
