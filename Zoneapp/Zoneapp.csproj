@@ -90,5 +90,20 @@
   <ItemGroup>
     <None Include="Resources\GamerZone_logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10680_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user2.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
