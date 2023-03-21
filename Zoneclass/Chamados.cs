@@ -47,7 +47,7 @@ namespace Zoneclass
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "insert chamados (data, titulo, assunto, status, cliente_id, usuario_id, motivo, data_final) " +
-                "values ('" + Data + "','" + Titulo + "','" + Assunto + "','" + Status + "','" + Cliente_Id + "','" + Usuario_Id + "','" + Motivo + "','" + Data_final + "')";
+                "values ('" + Data + "','" + Titulo + "','" + Assunto + "','" + Status + "','" + Cliente_Id + "','" + Usuario_Id + "','" + Motivo + "','" + Data_Final + "')";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "selectt @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
@@ -74,6 +74,27 @@ namespace Zoneclass
                     dr.GetDateTime(8)));
             }
             return lista;
+        }
+        public static Chamados ObterPorId(int id)
+        {
+            Chamados chamados = new Chamados();
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "select * from chamados where id = " + id;
+            var dr = cmd.ExecuteReader();
+            while(dr.Read())
+            {
+                chamados.Id = dr.GetInt32(0);
+                chamados.Data = dr.GetDateTime(1);
+                chamados.Titulo = dr.GetString(2);
+                chamados.Assunto = dr.GetString(3);
+                chamados.Status = dr.GetString(4);
+                chamados.Cliente_Id = dr.GetInt32(5);
+                chamados.Usuario_Id = dr.GetInt32(6);
+                chamados.Motivo = dr.GetString(7);
+                chamados.Data_Final = dr.GetDateTime(8);
+            }
+            return chamados;
         }
         public static void Atualizar (Chamados chamados)
         {

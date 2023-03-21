@@ -76,6 +76,27 @@ namespace Zoneclass
             }
             return listaEnd;
         }
+        public static Endereco ObterPorId(int id)
+        {
+            Endereco endereco = new Endereco();
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "select * from enderecos where id = " + id;
+            var dr = cmd.ExecuteReader();
+            while(dr.Read())
+            {
+                endereco.Id = dr.GetInt32(0);
+                endereco.Logradouro = dr.GetString(1);
+                endereco.Numero = dr.GetString(2);
+                endereco.Bairro = dr.GetString(3);
+                endereco.Cidade = dr.GetString(4);
+                endereco.Uf = dr.GetString(5);
+                endereco.Cep = dr.GetString(6);
+                endereco.Complemento = dr.GetString(7);
+                endereco.Tipo = dr.GetString(8);
+            }
+            return endereco;
+        }
         public static void Atualizar (Endereco endereco)
         {
             var cmd = Banco.Abrir();
