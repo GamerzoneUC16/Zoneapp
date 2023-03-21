@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,5 +29,11 @@ namespace Zoneclass
             Caracs = caracs;
             Produto_Id = produto_id;
         }
+    }
+    public void Inserir()
+    {
+        var cmd = Banco.Abrir();
+        cmd.CommandType = CommandType.Text;
+        cmd.CommandText = "insert carac_tec "
     }
 }

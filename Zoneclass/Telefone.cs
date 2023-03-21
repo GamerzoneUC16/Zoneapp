@@ -52,6 +52,21 @@ namespace Zoneclass
             }
             return listaTel;
         }
+        public static Telefone ObterPorId(int id)
+        {
+            Telefone telefone = new Telefone();
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = "select * from telefone where id = " + id;
+            var dr = cmd.ExecuteReader();
+            while(dr.Read())
+            {
+                telefone.Id = dr.GetInt32(0);
+                telefone.Numero = dr.GetString(1);
+                telefone.Tipo = dr.GetString(2);
+            }
+            return telefone;
+        }
         public static void Atualizar (Telefone telefone) 
         {
             var cmd = Banco.Abrir();

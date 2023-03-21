@@ -20,12 +20,5 @@ namespace Zoneclass
             Tipo = tipo;
             Cartao_Id = cartao_id;
         }
-        FrmPagamento meuPagamento = new FrmPagamento(1, "Cartão de crédito", 123);
-
-        Console.WriteLine($"ID do pagamento: {meuPagamento.Id}");
-        Console.WriteLine($"Tipo do pagamento: {meuPagamento.Tipo}");
-        Console.WriteLine($"ID do cartão: {meuPagamento.Cartao_Id}");
     }
-
-
 }
