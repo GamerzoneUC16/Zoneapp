@@ -8,15 +8,20 @@ namespace Zoneclass
 {
     public class FrmPagamento
     {
-        // propriedades do formulário de pagamento
         public int Id { get; set; }
         public string Tipo { get; set; }
         public int Cartao_Id { get; set; }
+        
+        public FrmPagamento() { }
 
-        // construtor
         public FrmPagamento(int id, string tipo, int cartao_id)
         {
             Id = id;
+            Tipo = tipo;
+            Cartao_Id = cartao_id;
+        }
+        public FrmPagamento(string tipo, int cartao_id) 
+        {
             Tipo = tipo;
             Cartao_Id = cartao_id;
         }

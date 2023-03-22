@@ -8,14 +8,13 @@ namespace Zoneclass
 {
     public class Images
     {
-        // propriedades das imagens
         public int Id { get; set; }
         public string Caminho { get; set; }
         public bool Principal_Img { get; set; }
         public int Produto_Id { get; set; }
+
         public Images() { }
 
-        // construtor
         public Images(int id, string caminho, bool principal_img, int produto_id)
         {
             Id = id;
@@ -28,6 +27,21 @@ namespace Zoneclass
             Caminho = caminho;
             Principal_Img = principal_img;
             Produto_Id = produto_id;
+        }
+        public void Inserir()
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType;
+            cmd.CommandText = "insert images (caminho, principal_img, produto_id) " +
+               "values ('" + Caminho + "','" + Principal_Img + "','" + Produto_Id + "')";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = "select @@identity";
+            Id = Convert.ToInt32(cmd.ExecuteScalar());
+            cmd.Connection.Close();
+        }
+        public static List<Images> Listar() 
+        {
+
         }
     }
 }

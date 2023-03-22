@@ -75,4 +75,21 @@ namespace Zoneclass
         }
         return carac_tec;
     }
+    public static void Atualizar(Carac_Tec carac_tec)
+    {
+        var cmd = Banco.Abrir();
+        cmd.CommandType = CommandType.Text;
+        cmd.CommandText = "update carac_tec set nome = '" +
+            carac_tec.Nome + "', caracs = '" + carac_tec.Caracs +
+            "' where id = " + carac_tec.Id;
+        cmd.ExecuteReader();
+    }
+    public bool Excluir (int id)
+    {
+        var cmd = Banco.Abrir();
+        cmd.CommandType = CommandType.Text;
+        cmd.CommandText = "delete from carac_tec where id = " + id;
+        bool result = cmd.ExecuteNonQuery() == 1 ? true : false;
+        return result;
+    }
 }
