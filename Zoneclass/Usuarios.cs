@@ -15,18 +15,18 @@ namespace Zoneclass
         public string Nome { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
-        public Nivel Nivel { get; set; }
+        public string Nivel { get; set; }
        
         public Usuario() { }
 
-        public Usuario(string _nome, string _login, string _senha, Nivel _nivel)
+        public Usuario(string _nome, string _login, string _senha, string _nivel)
         {
             Nome = _nome;
             Login = _login;
             Senha = _senha; 
             Nivel = _nivel;          
         }
-        public Usuario(int _id, string _nome, string _login, string _senha, Nivel _nivel)
+        public Usuario(int _id, string _nome, string _login, string _senha, string _nivel)
         {
             Id = _id;
             Nome = _nome;
@@ -39,7 +39,7 @@ namespace Zoneclass
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "insert usuarios (nome, login, senha, nivel_id) " +
-                "values ('" + Nome + "','" + Login + "'," + Senha + ",'" + Nivel.Id + "')";
+                "values ('" + Nome + "','" + Login + "'," + Senha + ",'" + Nivel + "')";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
@@ -59,7 +59,7 @@ namespace Zoneclass
                     dr.GetString(1),
                     dr.GetString(2),
                     dr.GetString(3),
-                    Nivel.ObterPorId(dr.GetInt32(4))));                    
+                    dr.GetString(4)));                    
             }
             return lista;
         }
@@ -76,7 +76,7 @@ namespace Zoneclass
                 usuario.Nome = dr.GetString(1);
                 usuario.Login = dr.GetString(2);
                 usuario.Senha = dr.GetString(3);
-                usuario.Nivel = Nivel.ObterPorId(dr.GetInt32(4));
+                usuario.Nivel = dr.GetString(4);
             }
             return usuario;
         }
@@ -111,7 +111,7 @@ namespace Zoneclass
                     dr.GetString(1),
                     dr.GetString(2),
                     dr.GetString(3),
-                    Nivel.ObterPorId(dr.GetInt32(4))));   
+                    dr.GetString(4)));   
             }
             return lista;
         }

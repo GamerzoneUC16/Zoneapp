@@ -89,9 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Banco.cs" />
-    <Compile Include="Boleto.cs" />
     <Compile Include="Carac_Tec.cs" />
-    <Compile Include="Cartao.cs" />
     <Compile Include="Chamados.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Enderecos.cs" />
