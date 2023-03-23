@@ -19,6 +19,8 @@ namespace Zoneclass
         public string Cep { get; set; }
         public string Complemento { get; set; }
         public string Tipo { get; set; }
+
+        public Cliente Cliente { get; set; }
         public Endereco() { }
 
         public Endereco(int id, string logradouro, string numero, string bairro, string cidade, string uf, string cep, string complemento, string tipo)
@@ -44,11 +46,25 @@ namespace Zoneclass
             Complemento = complemento;
             Tipo = tipo;
         }
+
+        public Endereco(int id, string logradouro, string numero, string bairro, string cidade, string uf, string cep, string complemento, string tipo, Cliente cliente)
+        {
+            Id = id;
+            Logradouro = logradouro;
+            Numero = numero;
+            Bairro = bairro;
+            Cidade = cidade;
+            Uf = uf;
+            Cep = cep;
+            Complemento = complemento;
+            Tipo = tipo;
+            Cliente = cliente;
+        }
+
         public void Inserir(int cliente_id)
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = "insert enderecos (cliente_id, logradouro, numero, bairro, cidade, uf, cep, complemento, tipo) " +
-                "values (" + cliente_id + "'" + Logradouro + "', '" + Numero + "','" + Bairro + "','" + Cidade + "','" + Uf + "','" + Cep + "','" + Complemento + "','" + Tipo + "')";
+            cmd.CommandText = "insert enderecos (logradouro,numero_end,bairro,cidade,uf,cep,complemento,tipo_end,cliente_id) " + "values ('" + Logradouro + "','" + "','" + Numero + "','" + "','" + Bairro + "','" + Cidade + "','" + Uf + "','" + Cep + "','" + Complemento + "','" + Tipo + "','" +cliente_id+"')";
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
@@ -56,7 +72,7 @@ namespace Zoneclass
         {
             List<Endereco> listaEnd = new List<Endereco>();
             var cmd = Banco.Abrir();
-            cmd.CommandText = "select id, numero, tipo from enderecos where cliente_id = " + cliente_id;
+            cmd.CommandText = "select id, numero_end, tipo_end from enderecos where cliente_id = " + cliente_id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -69,7 +85,8 @@ namespace Zoneclass
                             dr.GetString(5),
                             dr.GetString(6),
                             dr.GetString(7),
-                            dr.GetString(8)                           
+                            dr.GetString(8),
+                           Cliente.ObterPorId(dr.GetInt32(9))
                         )
 
                     );
@@ -80,7 +97,7 @@ namespace Zoneclass
         {
             Endereco endereco = new Endereco();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandType = CommandType.Text;
             cmd.CommandText = "select * from enderecos where id = " + id;
             var dr = cmd.ExecuteReader();
             while(dr.Read())
@@ -94,6 +111,7 @@ namespace Zoneclass
                 endereco.Cep = dr.GetString(6);
                 endereco.Complemento = dr.GetString(7);
                 endereco.Tipo = dr.GetString(8);
+                endereco.Cliente = Cliente.ObterPorId(dr.GetInt32(9));
             }
             return endereco;
         }
@@ -101,9 +119,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "update enderecos set logradouro = '" +
-                endereco.Logradouro + "', cidade = '" + endereco.Cidade +
-                "' where id = " + endereco.Id;
+            cmd.CommandText = "update enderecos set logradouro = '" + endereco.Logradouro + "', numero_end = '" + endereco.Numero +"', bairro = '"+endereco.Bairro+"', '"+endereco.Cidade+"', '"+endereco.Uf+"', '"+endereco.Cep+"', '"+endereco.Complemento+"', '"+endereco.Tipo+"', "+endereco.Cliente+" where id = " + endereco.Id;
             cmd.ExecuteReader();
         }
         public bool Excluir(int id) 

@@ -10,20 +10,46 @@ namespace Zoneclass
     {
         public int Id { get; set; }
         public string Tipo { get; set; }
-        public int Cartao_Id { get; set; }
         
         public FrmPagamento() { }
 
-        public FrmPagamento(int id, string tipo, int cartao_id)
+        public FrmPagamento(int id, string tipo)
         {
             Id = id;
             Tipo = tipo;
-            Cartao_Id = cartao_id;
         }
-        public FrmPagamento(string tipo, int cartao_id) 
+
+        public FrmPagamento(string tipo)
         {
             Tipo = tipo;
-            Cartao_Id = cartao_id;
+        }
+
+        public void Inserir()
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandText = "insert frmpagamento (tipo) values ('" + Tipo + "')";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = "select @@identity";
+        }
+
+        public static List<FrmPagamento> Listar() 
+        { 
+            List<FrmPagamento> lista = new List<FrmPagamento>();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = "select * from frmpagamento";
+            var dr = cmd.ExecuteNonQuery();
+            
+            while (dr.Read())
+            {
+                lista.Add(new FrmPagamento(
+                    dr.GetInt32(0),
+                    dr.GetString(1)
+                    )
+                 );
+            }
+            dr.Close();
+
+            return lista;
         }
     }
 }
