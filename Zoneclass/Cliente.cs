@@ -16,29 +16,7 @@ namespace Zoneclass
         public string Email { get; set; }
         public DateTime Datacad { get; set; }
         public bool Ativo { get; set; }
-        public List<Telefone> Telefones { get; set; }
-        public List<Endereco> Enderecos { get; set; }
-        public Cliente() { }
-        public Cliente(int id, string nome, string cpf, string email, DateTime datacad, bool ativo, List<Telefone> telefones, List<Endereco> enderecos)
-        {
-            Id = id;
-            Nome = nome;
-            Cpf = cpf;
-            Email = email;
-            Datacad = datacad;
-            Ativo = ativo;
-            Telefones = telefones;
-            Enderecos = enderecos;
-
-        }
-        public Cliente(string nome, string cpf, string email, DateTime datacad, bool ativo)
-        {
-            Nome = nome;
-            Cpf = cpf;
-            Email = email;
-            Datacad = datacad;
-            Ativo = ativo;
-        }
+       
         public Cliente(int id)
         {
             Telefones = Telefone.ListarPorCliente(id);

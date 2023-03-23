@@ -8,88 +8,88 @@ using System.Threading.Tasks;
 
 namespace Zoneclass
 {
-    public class Carac_Tec
+    public class Caracteristicas
     {
         public int Id { get; set; }
-        public string Nome { get; set; }
+        public string Modelo { get; set; }
         public string Caracs { get; set; }
-        public int Produto_Id { get; set; }
+        public Produtos Produtos { get; set; }
 
-        public Carac_Tec() { }
+        public Caracteristicas() { }
 
-        public Carac_Tec(int id, string nome, string caracs, int produto_id)
+        public Caracteristicas(int id, string modelo, string caracs, Produtos produtos)
         {
             Id = id;
-            Nome = nome;
+            Modelo = modelo;
             Caracs = caracs;
-            Produto_Id = produto_id;
+            Produtos = produtos;
         }
-        public Carac_Tec(string nome, string caracs, int produto_id)
+        public Caracteristicas(string modelo, string caracs, Produtos produtos)
         {
-            Nome = nome;
+            Modelo = modelo;
             Caracs = caracs;
-            Produto_Id = produto_id;
+            Produtos = produtos;
         }
         public void Inserir()
             {
                 var cmd = Banco.Abrir();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "insert carac_tec (nome, caracs, produto_id) " +
-                    "values ('" + Nome + "','" + Caracs + "','" + Produto_Id+ "')";
+                cmd.CommandText = "insert caracteristicas (modelo, caracs, produto_id) " +
+                    "values ('" + Modelo + "','" + Caracs + "','" + Produtos+ "')";
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = "select @@identity";
                 Id = Convert.ToInt32(cmd.ExecuteScalar());
                 cmd.Connection.Close();
             }
-        public static List<Carac_Tec> Listar()
+        public  List<Caracteristicas> Listar()
             {
-                List<Carac_Tec> lista = new List<Carac_Tec>();
+                List<Caracteristicas> lista = new List<Caracteristicas>();
                 var cmd = Banco.Abrir();
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = "select * from carac_tec order by nome asc";
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "select * from caracteristicas order by modelo asc";
                 var dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    lista.Add(new Carac_Tec(
-                        dr.GetInt32(0),
-                        dr.GetString(1),
-                        dr.GetString(2),
-                        dr.GetInt32(3)));
+                lista.Add(new Caracteristicas(
+                    dr.GetInt32(0),
+                    dr.GetString(1),
+                    dr.GetString(2),
+                    Produtos.ObterPorId(dr.GetInt32(3))));
                 }
                 return lista;
 
             }
-        public static Carac_Tec ObterPorId(int id)
+        public static Caracteristicas ObterPorId(int id)
         {
-            Carac_Tec carac_tec = new Carac_Tec();
+            Caracteristicas caracteristicas = new Caracteristicas();
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "select * from carac_tec where id = " + id;
+            cmd.CommandText = "select * from caracteristicas where id = " + id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                carac_tec.Id = dr.GetInt32(0);
-                carac_tec.Nome = dr.GetString(1);
-                carac_tec.Caracs = dr.GetString(2);
-                carac_tec.Produto_Id = dr.GetInt32(3);
+                caracteristicas.Id = dr.GetInt32(0);
+                caracteristicas.Modelo = dr.GetString(1);
+                caracteristicas.Caracs = dr.GetString(2);
+                caracteristicas.Produtos = Produtos.ObterPorId(dr.GetInt32(3));
             }
-            return carac_tec;
+            return caracteristicas;
     
         }
-        public static void Atualizar(Carac_Tec carac_tec)
+        public static void Atualizar(Caracteristicas caracteristicas)
             {
                 var cmd = Banco.Abrir();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "update carac_tec set nome = '" +
-                    carac_tec.Nome + "', caracs = '" + carac_tec.Caracs +
-                    "' where id = " + carac_tec.Id;
+                cmd.CommandText = "update caracteristicas set nome = '" +
+                    caracteristicas.Modelo + "', caracteristicas = '" + caracteristicas.Caracs +
+                    "' where id = " + caracteristicas.Id;
                 cmd.ExecuteReader();
             }
         public bool Excluir (int id)
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "delete from carac_tec where id = " + id;
+            cmd.CommandText = "delete from caracteristicas where id = " + id;
             bool result = cmd.ExecuteNonQuery() == 1 ? true : false;
             return result;
         }
