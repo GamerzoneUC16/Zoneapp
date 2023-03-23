@@ -15,32 +15,25 @@ namespace Zoneclass
         public double Quantidade { get; set; }
         public double Preco { get; set; }
         public double Desconto { get; set; }
-        public Produto Produto { get; set; }
+        public Produtos Produto { get; set; }
         
         public ItemPedido() { }
-        public ItemPedido(double quantidade, double preco, double desconto, Produto produto)
+        public ItemPedido(double quantidade, double preco, double desconto, Produtos produto)
         {
             Quantidade = quantidade;
             Preco = preco;
             Desconto = desconto;
             Produto = produto;   
         }
-        public ItemPedido(int id, double quantidade, double desconto, Produto produto)
-        {
-            Id = id;
-            Quantidade = quantidade;
-            Preco = Produto.Preco;
-            Desconto = desconto;
-            Produto = produto;  
-        }
-        public ItemPedido(int id, double quantidade, double preco, double desconto, Produto produto)
+        public ItemPedido(int id, double quantidade, double preco, double desconto, Produtos produto)
         {
             Id = id;
             Quantidade = quantidade;
             Preco = preco;
             Desconto = desconto;
-            Produto = produto;
+            Produto = produto;  
         }
+       
         public static List<ItemPedido> Listar(int pedido_id)
         {
             List<ItemPedido> itens = new List<ItemPedido>();
@@ -54,7 +47,7 @@ namespace Zoneclass
                     dr.GetDouble(1),
                     dr.GetDouble(2),
                     dr.GetDouble(3),
-                    Produto.ObterPorId(dr.GetInt32(4))
+                    Produtos.ObterPorId(dr.GetInt32(4))
                     ));
             }
             return itens;
@@ -71,7 +64,7 @@ namespace Zoneclass
                 iten.Quantidade = dr.GetDouble(1);
                 iten.Preco = dr.GetDouble(2);
                 iten.Desconto = dr.GetDouble(3);
-                iten.Produto = Produto.ObterPorId(dr.GetInt32(4)); 
+                iten.Produto = Produtos.ObterPorId(dr.GetInt32(4)); 
             }
             return iten;
         }

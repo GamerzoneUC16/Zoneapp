@@ -47,7 +47,7 @@ namespace Zoneclass
         public void Inserir(int cliente_id)
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = "insert Enderecos (cliente_id, logradouro, numero, bairro, cidade, uf, cep, complemento, tipo) " +
+            cmd.CommandText = "insert enderecos (cliente_id, logradouro, numero, bairro, cidade, uf, cep, complemento, tipo) " +
                 "values (" + cliente_id + "'" + Logradouro + "', '" + Numero + "','" + Bairro + "','" + Cidade + "','" + Uf + "','" + Cep + "','" + Complemento + "','" + Tipo + "')";
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
@@ -56,7 +56,7 @@ namespace Zoneclass
         {
             List<Endereco> listaEnd = new List<Endereco>();
             var cmd = Banco.Abrir();
-            cmd.CommandText = "select id, numero, tipo from Enderecos where cliente_id = " + cliente_id;
+            cmd.CommandText = "select id, numero, tipo from enderecos where cliente_id = " + cliente_id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
