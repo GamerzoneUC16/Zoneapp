@@ -8,7 +8,7 @@ using Zoneclass;
 
 namespace Zoneclass
 {
-    public class Produto
+    public class Produtos
     {
         public int Id { get; set; }
         public string Titulo { get; set; }
@@ -20,8 +20,8 @@ namespace Zoneclass
         public double Desconto { get; set; }
 
         //Métodos construtores 
-        public Produto() { }
-        public Produto(int id, string titulo, string descricao, string resumo, double preco, string image, string destaque, double desconto)
+        public Produtos() { }
+        public Produtos(int id, string titulo, string descricao, string resumo, double preco, string image, string destaque, double desconto)
         {
             Id = id;
             Titulo = titulo;
@@ -33,7 +33,7 @@ namespace Zoneclass
             Desconto = desconto;
         }
 
-        public Produto(string titulo, string descricao, string resumo, double preco, string image, string destaque, double desconto)
+        public Produtos(string titulo, string descricao, string resumo, double preco, string image, string destaque, double desconto)
         {      
             Titulo = titulo;
             Descricao = descricao;
@@ -50,24 +50,24 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "insert produtos (titulo, descricao, resumo, preco, image, destaque, desconto) " +
+            cmd.CommandText = "insert Produtos (titulo, descricao, resumo, preco, image, destaque, desconto) " +
                 "values ('" + Titulo + "','" + Descricao + "','" + Resumo + "'," + Preco + "," + Image + "," + Destaque + "," + Desconto + ")";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
 
         }
-        public static List<Produto> Listar()
+        public static List<Produtos> Listar()
         {
 
-            List<Produto> lista = new List<Produto>();
+            List<Produtos> lista = new List<Produtos>();
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "select * from produtos order by descricao asc";
+            cmd.CommandText = "select * from Produtos order by descricao asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                lista.Add(new Produto(
+                lista.Add(new Produtos(
                     dr.GetInt32(0),
                     dr.GetString(1),
                     dr.GetString(2),
@@ -82,32 +82,32 @@ namespace Zoneclass
 
             return lista;
         }
-        public static Produto ObterPorId(int id)
+        public static Produtos ObterPorId(int id)
         {
-            Produto produto = new Produto();
+            Produtos Produtos = new Produtos();
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "select * from produtos where id = " + id;
+            cmd.CommandText = "select * from Produtos where id = " + id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                produto.Id = dr.GetInt32(0);
-                produto.Titulo = dr.GetString(1);
-                produto.Descricao = dr.GetString(2);
-                produto.Resumo = dr.GetString(3);
-                produto.Preco = dr.GetDouble(4);
-                produto.Image = dr.GetString(5);
-                produto.Destaque = dr.GetString(6);
-                produto.Desconto = dr.GetDouble(7);
+                Produtos.Id = dr.GetInt32(0);
+                Produtos.Titulo = dr.GetString(1);
+                Produtos.Descricao = dr.GetString(2);
+                Produtos.Resumo = dr.GetString(3);
+                Produtos.Preco = dr.GetDouble(4);
+                Produtos.Image = dr.GetString(5);
+                Produtos.Destaque = dr.GetString(6);
+                Produtos.Desconto = dr.GetDouble(7);
             }
 
-            return produto;
+            return Produtos;
         }
         public void Atualizar()
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "update produtos set titulo = '" + Titulo + "'," +
+            cmd.CommandText = "update Produtos set titulo = '" + Titulo + "'," +
                 "descricao = '" + Descricao + "', resumo = '" + Resumo + "', preco = " + Preco + ", image = " + Image + " , destaque = " + Destaque + " " + " , desconto = " + Desconto +
                 "where id = " + Id;
             cmd.ExecuteReader();
@@ -116,7 +116,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "update produtos set descontinuado = 1 where id = " + id;
+            cmd.CommandText = "update Produtos set descontinuado = 1 where id = " + id;
             return cmd.ExecuteNonQuery() == 1 ? true : false;
 
         }
@@ -124,20 +124,20 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "update produtos set descontinuado = 0 where id = " + id;
+            cmd.CommandText = "update Produtos set descontinuado = 0 where id = " + id;
             return cmd.ExecuteNonQuery() == 1 ? true : false;
 
         }
-        public static List<Produto> BuscarPorDestricao(string _parte)
+        public static List<Produtos> BuscarPorDestricao(string _parte)
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from produtos where titulo like '%" + _parte + "%' order by nome;";
+            cmd.CommandText = "select * from Produtos where titulo like '%" + _parte + "%' order by nome;";
             var dr = cmd.ExecuteReader();
-            List<Produto> lista = new List<Produto>();
+            List<Produtos> lista = new List<Produtos>();
             while (dr.Read())
             {
-                lista.Add(new Produto(
+                lista.Add(new Produtos(
                 dr.GetInt32(0),
                 dr.GetString(1),
                 dr.GetString(2),

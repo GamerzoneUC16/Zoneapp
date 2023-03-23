@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+
 
 namespace Zoneclass
 {
@@ -16,7 +16,7 @@ namespace Zoneclass
             MySqlCommand cmd = new MySqlCommand();
             try // tentar abrir
             {
-                string strCon = @"server=127.0.0.1;database=usbw;user id=root;password=";
+                string strCon = @"server=127.0.0.1;database=gamerzonedb;user id=root;password=usbw;port=3307";
                 MySqlConnection cn = new MySqlConnection(strCon);
                 cn.Open();
                 cmd.Connection = cn;

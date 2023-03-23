@@ -89,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Banco.cs" />
-    <Compile Include="Carac_Tec.cs" />
+    <Compile Include="Caracteristicas.cs" />
     <Compile Include="Chamados.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Enderecos.cs" />

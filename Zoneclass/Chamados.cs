@@ -10,44 +10,49 @@ namespace Zoneclass
     public class Chamados
     {
         public int Id { get; set; }
-        public DateTime Data { get; set; }
         public string Titulo { get; set; }
-        public string Assunto { get; set; }
-        public string Status { get; set; }
-        public int Cliente_Id { get; set; }
-        public int Usuario_Id { get; set; }
         public string Motivo { get; set; }
+        public string Assunto { get; set; }
+        public string Anexo { get; set; }
+        public string Status { get; set; }
+        public DateTime Data { get ; set; }
+        public Cliente Cliente { get; set; }
+        public Usuario Usuario { get; set; }
         public DateTime Data_Final { get; set; }
-        public Chamados() { }
-        public Chamados (int id, DateTime data, string titulo, string assunto, string status, int cliente_id, int usuario_id, string motivo, DateTime data_final) 
+       
+        public Chamados(int id, string titulo, string motivo, string assunto, string anexo, string status, DateTime data, Cliente cliente, Usuario usuario, DateTime data_Final)
         {
             Id = id;
-            Data = data;
             Titulo = titulo;
-            Assunto = assunto;
-            Status = status;
-            Cliente_Id = cliente_id;
-            Usuario_Id = usuario_id;
             Motivo = motivo;
-            Data_Final = data_final;
+            Assunto = assunto;
+            Anexo = anexo;
+            Status = status;
+            Data = data;
+            Cliente = cliente;
+            Usuario = usuario;
+            Data_Final = data_Final;
         }
-        public Chamados (DateTime data, string titulo, string assunto, string status, int cliente_id, int usuario_id, string motivo, DateTime data_final)
+
+        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data, Cliente cliente, Usuario usuario, DateTime data_Final)
         {
-            Data = data;
             Titulo = titulo;
-            Assunto = assunto;
-            Status = status;
-            Cliente_Id = cliente_id;
-            Usuario_Id= usuario_id;
             Motivo = motivo;
-            Data_Final = data_final;
+            Assunto = assunto;
+            Anexo = anexo;
+            Status = status;
+            Data = data;
+            Cliente = cliente;
+            Usuario = usuario;
+            Data_Final = data_Final;
         }
+
         public void Inserir()
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert chamados (data, titulo, assunto, status, cliente_id, usuario_id, motivo, data_final) " +
-                "values ('" + Data + "','" + Titulo + "','" + Assunto + "','" + Status + "','" + Cliente_Id + "','" + Usuario_Id + "','" + Motivo + "','" + Data_Final + "')";
+            cmd.CommandText = "insert chamados (titulo, motivo, assunto, anexo, status, data, cliente, usuario, data_final) " +
+                "values ('" + Titulo + "','" + Motivo + "','" + Assunto + "','" + Anexo + "','" + Status + "','" + Data +"','" + Cliente + "','" + Usuario + "','" + Data_Final + "')";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "selectt @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
