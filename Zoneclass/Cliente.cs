@@ -12,16 +12,11 @@ namespace Zoneclass
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string Cpf { get; set; }
+        public string Sobrenome { get; set; }
         public string Email { get; set; }
-        public DateTime Datacad { get; set; }
+        public string Cpf { get; set; }
         public bool Ativo { get; set; }
        
-        public Cliente(int id)
-        {
-            Telefones = Telefone.ListarPorCliente(id);
-            Enderecos = Endereco.ListarPorCliente(id);
-        }
         public void Inserir()
         {
             var cmd = Banco.Abrir();

@@ -19,8 +19,10 @@ namespace Zoneclass
         public Cliente Cliente { get; set; }
         public Usuario Usuario { get; set; }
         public DateTime Data_Final { get; set; }
+
+        public Chamados () { }
        
-        public Chamados(int id, string titulo, string motivo, string assunto, string anexo, string status, DateTime data, Cliente cliente, Usuario usuario, DateTime data_Final)
+        public Chamados(int id, string titulo, string motivo, string assunto, string anexo, string status, DateTime data, Cliente cliente, Usuario usuario, DateTime data_final)
         {
             Id = id;
             Titulo = titulo;
@@ -31,10 +33,10 @@ namespace Zoneclass
             Data = data;
             Cliente = cliente;
             Usuario = usuario;
-            Data_Final = data_Final;
+            Data_Final = data_final;
         }
 
-        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data, Cliente cliente, Usuario usuario, DateTime data_Final)
+        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data, Cliente cliente, Usuario usuario, DateTime data_final)
         {
             Titulo = titulo;
             Motivo = motivo;
@@ -44,7 +46,7 @@ namespace Zoneclass
             Data = data;
             Cliente = cliente;
             Usuario = usuario;
-            Data_Final = data_Final;
+            Data_Final = data_final;
         }
 
         public void Inserir()
@@ -58,7 +60,7 @@ namespace Zoneclass
             Id = Convert.ToInt32(cmd.ExecuteScalar());
             cmd.Connection.Close();
         }
-        public static List<Chamados> Listar()
+        public List<Chamados> Listar()
         {
             List<Chamados> lista = new List<Chamados>();
             var cmd = Banco.Abrir();
@@ -68,15 +70,16 @@ namespace Zoneclass
             while (dr.Read())
             {
                 lista.Add(new Chamados(
-                    dr.GetInt32(0),
-                    dr.GetDateTime(1),
+                    dr.GetInt32(0),                   
+                    dr.GetString(1),
                     dr.GetString(2),
                     dr.GetString(3),
                     dr.GetString(4),
-                    dr.GetInt32(5),
-                    dr.GetInt32(6),
-                    dr.GetString(7),
-                    dr.GetDateTime(8)));
+                    dr.GetString(5),
+                    dr.GetDateTime(6),
+                    Cliente.ObterPorId(dr.GetInt32(7)),   
+                    Usuario.ObterPorId(dr.GetInt32(8)),
+                    dr.GetDateTime(9)));
             }
             return lista;
         }
@@ -90,14 +93,15 @@ namespace Zoneclass
             while(dr.Read())
             {
                 chamados.Id = dr.GetInt32(0);
-                chamados.Data = dr.GetDateTime(1);
-                chamados.Titulo = dr.GetString(2);
+                chamados.Titulo = dr.GetString(1);
+                chamados.Motivo = dr.GetString(2);
                 chamados.Assunto = dr.GetString(3);
-                chamados.Status = dr.GetString(4);
-                chamados.Cliente_Id = dr.GetInt32(5);
-                chamados.Usuario_Id = dr.GetInt32(6);
-                chamados.Motivo = dr.GetString(7);
-                chamados.Data_Final = dr.GetDateTime(8);
+                chamados.Anexo = dr.GetString(4);
+                chamados.Status = dr.GetString(5);
+                chamados.Data = dr.GetDateTime(6);
+                chamados.Cliente = Cliente.ObterPorId(dr.GetInt32(7));
+                chamados.Usuario = Usuario.ObterPorId(dr.GetInt32(8));
+                chamados.Data_Final = dr.GetDateTime(9);
             }
             return chamados;
         }
