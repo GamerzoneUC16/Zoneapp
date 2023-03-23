@@ -17,24 +17,6 @@ namespace Zoneapp
             InitializeComponent();
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void descricaoChamado_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void codigo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

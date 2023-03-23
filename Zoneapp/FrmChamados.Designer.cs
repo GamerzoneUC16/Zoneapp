@@ -29,9 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,9 +47,6 @@
             this.ColumnData = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnAtivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -71,6 +71,34 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de Chamados";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Azure;
+            this.label7.Image = global::Zoneapp.Properties.Resources.GamerZone_logo;
+            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label7.Location = new System.Drawing.Point(6, 720);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(117, 43);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "              ";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Azure;
+            this.label6.Image = global::Zoneapp.Properties.Resources.GamerZone_logo;
+            this.label6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label6.Location = new System.Drawing.Point(1213, 720);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(117, 43);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "              ";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // button2
             // 
@@ -107,6 +135,20 @@
             this.label5.Size = new System.Drawing.Size(136, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "LISTA DE CHAMADOS";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Azure;
+            this.label3.Image = global::Zoneapp.Properties.Resources.GamerZone_logo;
+            this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label3.Location = new System.Drawing.Point(6, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(117, 43);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "              ";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label1
             // 
@@ -209,48 +251,6 @@
             this.ColumnAtivo.HeaderText = "Ativo";
             this.ColumnAtivo.Name = "ColumnAtivo";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Azure;
-            this.label7.Image = global::Zoneapp.Properties.Resources.GamerZone_logo;
-            this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label7.Location = new System.Drawing.Point(6, 720);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(117, 43);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "              ";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Azure;
-            this.label6.Image = global::Zoneapp.Properties.Resources.GamerZone_logo;
-            this.label6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label6.Location = new System.Drawing.Point(1213, 720);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(117, 43);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "              ";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Azure;
-            this.label3.Image = global::Zoneapp.Properties.Resources.GamerZone_logo;
-            this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label3.Location = new System.Drawing.Point(6, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 43);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "              ";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -285,7 +285,6 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnHashcode;
@@ -303,5 +302,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label2;
     }
 }
