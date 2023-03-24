@@ -93,7 +93,7 @@
             this.label6.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.label6.Location = new System.Drawing.Point(373, 16);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(541, 61);
+            this.label6.Size = new System.Drawing.Size(366, 41);
             this.label6.TabIndex = 16;
             this.label6.Text = "GamerZone SERVICES";
             // 
@@ -103,7 +103,7 @@
             this.cmbUsuario.FormattingEnabled = true;
             this.cmbUsuario.Location = new System.Drawing.Point(6, 72);
             this.cmbUsuario.Name = "cmbUsuario";
-            this.cmbUsuario.Size = new System.Drawing.Size(153, 37);
+            this.cmbUsuario.Size = new System.Drawing.Size(153, 28);
             this.cmbUsuario.TabIndex = 15;
             this.cmbUsuario.Text = "Atendente";
             // 
@@ -133,7 +133,7 @@
             this.label5.ForeColor = System.Drawing.SystemColors.Control;
             this.label5.Location = new System.Drawing.Point(14, 113);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(123, 29);
+            this.label5.Size = new System.Drawing.Size(86, 20);
             this.label5.TabIndex = 14;
             this.label5.Text = "Resposta";
             // 
@@ -143,7 +143,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.label4.Location = new System.Drawing.Point(47, 60);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 29);
+            this.label4.Size = new System.Drawing.Size(53, 20);
             this.label4.TabIndex = 12;
             this.label4.Text = "Título";
             // 
@@ -152,7 +152,7 @@
             this.txtTituloResp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
             this.txtTituloResp.Location = new System.Drawing.Point(142, 53);
             this.txtTituloResp.Name = "txtTituloResp";
-            this.txtTituloResp.Size = new System.Drawing.Size(224, 40);
+            this.txtTituloResp.Size = new System.Drawing.Size(224, 29);
             this.txtTituloResp.TabIndex = 11;
             // 
             // btnAtualizar
@@ -229,7 +229,7 @@
             this.cmbMotivo.FormattingEnabled = true;
             this.cmbMotivo.Location = new System.Drawing.Point(401, 134);
             this.cmbMotivo.Name = "cmbMotivo";
-            this.cmbMotivo.Size = new System.Drawing.Size(244, 41);
+            this.cmbMotivo.Size = new System.Drawing.Size(244, 32);
             this.cmbMotivo.TabIndex = 22;
             // 
             // cmbStatus
@@ -243,18 +243,18 @@
             "Concluido",
             "Cancelado",
             "Em ánalise"});
-            this.cmbStatus.Location = new System.Drawing.Point(622, 62);
+            this.cmbStatus.Location = new System.Drawing.Point(624, 50);
             this.cmbStatus.Name = "cmbStatus";
-            this.cmbStatus.Size = new System.Drawing.Size(155, 41);
+            this.cmbStatus.Size = new System.Drawing.Size(155, 32);
             this.cmbStatus.TabIndex = 19;
             this.cmbStatus.Text = "Status";
             // 
             // lblHashcode
             // 
             this.lblHashcode.AutoSize = true;
-            this.lblHashcode.Location = new System.Drawing.Point(616, 23);
+            this.lblHashcode.Location = new System.Drawing.Point(620, 23);
             this.lblHashcode.Name = "lblHashcode";
-            this.lblHashcode.Size = new System.Drawing.Size(315, 33);
+            this.lblHashcode.Size = new System.Drawing.Size(213, 24);
             this.lblHashcode.TabIndex = 21;
             this.lblHashcode.Text = "#Código do Chamado";
             // 
@@ -263,7 +263,7 @@
             this.chkAtivo.AutoSize = true;
             this.chkAtivo.Location = new System.Drawing.Point(666, 134);
             this.chkAtivo.Name = "chkAtivo";
-            this.chkAtivo.Size = new System.Drawing.Size(111, 37);
+            this.chkAtivo.Size = new System.Drawing.Size(75, 28);
             this.chkAtivo.TabIndex = 20;
             this.chkAtivo.Text = "Ativo";
             this.chkAtivo.UseVisualStyleBackColor = true;
@@ -272,9 +272,9 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(396, 94);
+            this.label7.Location = new System.Drawing.Point(397, 111);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(90, 29);
+            this.label7.Size = new System.Drawing.Size(61, 20);
             this.label7.TabIndex = 14;
             this.label7.Text = "Motivo";
             // 
@@ -282,9 +282,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 40);
+            this.label3.Location = new System.Drawing.Point(32, 37);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(210, 29);
+            this.label3.Size = new System.Drawing.Size(141, 20);
             this.label3.TabIndex = 9;
             this.label3.Text = "Nome do Cliente";
             // 
@@ -313,9 +313,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(104, 94);
+            this.label2.Location = new System.Drawing.Point(100, 110);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 29);
+            this.label2.Size = new System.Drawing.Size(53, 20);
             this.label2.TabIndex = 6;
             this.label2.Text = "Título";
             // 
@@ -323,9 +323,9 @@
             // 
             this.txtNomeCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
             this.txtNomeCliente.Enabled = false;
-            this.txtNomeCliente.Location = new System.Drawing.Point(222, 33);
+            this.txtNomeCliente.Location = new System.Drawing.Point(176, 31);
             this.txtNomeCliente.Name = "txtNomeCliente";
-            this.txtNomeCliente.Size = new System.Drawing.Size(224, 40);
+            this.txtNomeCliente.Size = new System.Drawing.Size(224, 29);
             this.txtNomeCliente.TabIndex = 4;
             this.txtNomeCliente.TextChanged += new System.EventHandler(this.txtNomeCliente_TextChanged);
             // 
@@ -344,9 +344,9 @@
             // 
             this.txtTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
             this.txtTitulo.Enabled = false;
-            this.txtTitulo.Location = new System.Drawing.Point(104, 135);
+            this.txtTitulo.Location = new System.Drawing.Point(103, 133);
             this.txtTitulo.Name = "txtTitulo";
-            this.txtTitulo.Size = new System.Drawing.Size(274, 40);
+            this.txtTitulo.Size = new System.Drawing.Size(274, 29);
             this.txtTitulo.TabIndex = 1;
             // 
             // label1
@@ -355,7 +355,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(100, 187);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 29);
+            this.label1.Size = new System.Drawing.Size(89, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Descrição";
             // 

@@ -37,19 +37,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvChamados = new System.Windows.Forms.DataGridView();
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnHashcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTitulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnAssunto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnIdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnUsuarioId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnResposta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnAtivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.clnHashcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnTitulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChamados)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -63,14 +61,13 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dgvChamados);
             this.groupBox1.Location = new System.Drawing.Point(0, -1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1336, 785);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de Chamados";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // label7
             // 
@@ -81,7 +78,7 @@
             this.label7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label7.Location = new System.Drawing.Point(6, 720);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(170, 70);
+            this.label7.Size = new System.Drawing.Size(117, 43);
             this.label7.TabIndex = 13;
             this.label7.Text = "              ";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -95,7 +92,7 @@
             this.label6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label6.Location = new System.Drawing.Point(1213, 720);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(170, 70);
+            this.label6.Size = new System.Drawing.Size(117, 43);
             this.label6.TabIndex = 12;
             this.label6.Text = "              ";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -130,9 +127,9 @@
             this.label5.BackColor = System.Drawing.SystemColors.ControlText;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(587, 81);
+            this.label5.Location = new System.Drawing.Point(622, 68);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(204, 20);
+            this.label5.Size = new System.Drawing.Size(136, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "LISTA DE CHAMADOS";
             // 
@@ -145,7 +142,7 @@
             this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label3.Location = new System.Drawing.Point(6, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(170, 70);
+            this.label3.Size = new System.Drawing.Size(117, 43);
             this.label3.TabIndex = 6;
             this.label3.Text = "              ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -159,11 +156,10 @@
             this.label2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label2.Location = new System.Drawing.Point(1213, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(170, 70);
+            this.label2.Size = new System.Drawing.Size(117, 43);
             this.label2.TabIndex = 5;
             this.label2.Text = "              ";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
@@ -172,32 +168,29 @@
             this.label1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Azure;
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(343, 16);
+            this.label1.Location = new System.Drawing.Point(445, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(610, 70);
+            this.label1.Size = new System.Drawing.Size(407, 43);
             this.label1.TabIndex = 4;
             this.label1.Text = "              GAMERZONE CALLED";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // dataGridView1
+            // dgvChamados
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvChamados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChamados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnID,
-            this.ColumnHashcode,
-            this.ColumnTitulo,
-            this.ColumnAssunto,
-            this.ColumnIdCliente,
-            this.ColumnUsuarioId,
-            this.ColumnResposta,
-            this.ColumnData,
-            this.ColumnAtivo});
-            this.dataGridView1.Location = new System.Drawing.Point(96, 104);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.Size = new System.Drawing.Size(1164, 581);
-            this.dataGridView1.TabIndex = 0;
+            this.clnHashcode,
+            this.clnTitulo,
+            this.clnCliente,
+            this.clnUsuario,
+            this.clnData,
+            this.clnStatus});
+            this.dgvChamados.Location = new System.Drawing.Point(350, 95);
+            this.dgvChamados.Name = "dgvChamados";
+            this.dgvChamados.RowHeadersWidth = 62;
+            this.dgvChamados.Size = new System.Drawing.Size(713, 581);
+            this.dgvChamados.TabIndex = 0;
             // 
             // ColumnID
             // 
@@ -208,76 +201,47 @@
             this.ColumnID.ReadOnly = true;
             this.ColumnID.Width = 50;
             // 
-            // ColumnHashcode
+            // clnHashcode
             // 
-            this.ColumnHashcode.Frozen = true;
-            this.ColumnHashcode.HeaderText = "Hashcode";
-            this.ColumnHashcode.MinimumWidth = 8;
-            this.ColumnHashcode.Name = "ColumnHashcode";
-            this.ColumnHashcode.ReadOnly = true;
-            this.ColumnHashcode.Width = 150;
+            this.clnHashcode.Frozen = true;
+            this.clnHashcode.HeaderText = "Hashcode";
+            this.clnHashcode.Name = "clnHashcode";
+            this.clnHashcode.ReadOnly = true;
             // 
-            // ColumnTitulo
+            // clnTitulo
             // 
-            this.ColumnTitulo.Frozen = true;
-            this.ColumnTitulo.HeaderText = "Titulo";
-            this.ColumnTitulo.MinimumWidth = 8;
-            this.ColumnTitulo.Name = "ColumnTitulo";
-            this.ColumnTitulo.ReadOnly = true;
-            this.ColumnTitulo.Width = 150;
+            this.clnTitulo.Frozen = true;
+            this.clnTitulo.HeaderText = "Titulo";
+            this.clnTitulo.Name = "clnTitulo";
+            this.clnTitulo.ReadOnly = true;
             // 
-            // ColumnAssunto
+            // clnCliente
             // 
-            this.ColumnAssunto.FillWeight = 500F;
-            this.ColumnAssunto.Frozen = true;
-            this.ColumnAssunto.HeaderText = "Assunto";
-            this.ColumnAssunto.MinimumWidth = 8;
-            this.ColumnAssunto.Name = "ColumnAssunto";
-            this.ColumnAssunto.ReadOnly = true;
-            this.ColumnAssunto.Width = 180;
+            this.clnCliente.Frozen = true;
+            this.clnCliente.HeaderText = "Cliente";
+            this.clnCliente.Name = "clnCliente";
+            this.clnCliente.ReadOnly = true;
             // 
-            // ColumnIdCliente
+            // clnUsuario
             // 
-            this.ColumnIdCliente.Frozen = true;
-            this.ColumnIdCliente.HeaderText = "Cliente";
-            this.ColumnIdCliente.MinimumWidth = 8;
-            this.ColumnIdCliente.Name = "ColumnIdCliente";
-            this.ColumnIdCliente.ReadOnly = true;
-            this.ColumnIdCliente.Width = 130;
+            this.clnUsuario.Frozen = true;
+            this.clnUsuario.HeaderText = "Usuário";
+            this.clnUsuario.Name = "clnUsuario";
+            this.clnUsuario.ReadOnly = true;
             // 
-            // ColumnUsuarioId
+            // clnData
             // 
-            this.ColumnUsuarioId.Frozen = true;
-            this.ColumnUsuarioId.HeaderText = "Usuário";
-            this.ColumnUsuarioId.MinimumWidth = 8;
-            this.ColumnUsuarioId.Name = "ColumnUsuarioId";
-            this.ColumnUsuarioId.ReadOnly = true;
-            this.ColumnUsuarioId.Width = 130;
+            this.clnData.Frozen = true;
+            this.clnData.HeaderText = "Data";
+            this.clnData.Name = "clnData";
+            this.clnData.ReadOnly = true;
             // 
-            // ColumnResposta
+            // clnStatus
             // 
-            this.ColumnResposta.Frozen = true;
-            this.ColumnResposta.HeaderText = "Resposta";
-            this.ColumnResposta.MinimumWidth = 8;
-            this.ColumnResposta.Name = "ColumnResposta";
-            this.ColumnResposta.ReadOnly = true;
-            this.ColumnResposta.Width = 180;
-            // 
-            // ColumnData
-            // 
-            this.ColumnData.Frozen = true;
-            this.ColumnData.HeaderText = "Data";
-            this.ColumnData.MinimumWidth = 8;
-            this.ColumnData.Name = "ColumnData";
-            this.ColumnData.ReadOnly = true;
-            this.ColumnData.Width = 150;
-            // 
-            // ColumnAtivo
-            // 
-            this.ColumnAtivo.HeaderText = "Ativo";
-            this.ColumnAtivo.MinimumWidth = 8;
-            this.ColumnAtivo.Name = "ColumnAtivo";
-            this.ColumnAtivo.Width = 150;
+            this.clnStatus.Frozen = true;
+            this.clnStatus.HeaderText = "Status";
+            this.clnStatus.Name = "clnStatus";
+            this.clnStatus.ReadOnly = true;
             // 
             // FrmChamados
             // 
@@ -289,7 +253,7 @@
             this.Text = "FrmServices";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChamados)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -297,17 +261,8 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvChamados;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnHashcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTitulo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAssunto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIdCliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUsuarioId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnResposta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnData;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ColumnAtivo;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
@@ -316,5 +271,12 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnHashcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnTitulo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnUsuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnStatus;
     }
 }
