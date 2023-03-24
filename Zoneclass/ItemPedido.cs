@@ -18,13 +18,7 @@ namespace Zoneclass
         public Produtos Produto { get; set; }
         
         public ItemPedido() { }
-        public ItemPedido(double quantidade, double preco, double desconto, Produtos produto)
-        {
-            Quantidade = quantidade;
-            Preco = preco;
-            Desconto = desconto;
-            Produto = produto;   
-        }
+        
         public ItemPedido(int id, double quantidade, double preco, double desconto, Produtos produto)
         {
             Id = id;
@@ -33,7 +27,15 @@ namespace Zoneclass
             Desconto = desconto;
             Produto = produto;  
         }
-       
+
+        public ItemPedido(double quantidade, double preco, double desconto, Produtos produto)
+        {
+            Quantidade = quantidade;
+            Preco = preco;
+            Desconto = desconto;
+            Produto = produto;   
+        }
+        
         public static List<ItemPedido> Listar(int pedido_id)
         {
             List<ItemPedido> itens = new List<ItemPedido>();
