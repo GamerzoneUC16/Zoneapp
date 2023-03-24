@@ -16,6 +16,7 @@ namespace Zoneclass
         public double Desconto { get; set; }
         public Cliente Cliente { get; set; }
         public List<ItemPedido> Itens { get; set; }
+        public FrmPagamento FrmPagamento { get; set; }  
 
         public Pedido()
         {
@@ -29,20 +30,32 @@ namespace Zoneclass
             Cliente = cliente;
         }
 
-        public Pedido(int id, double preco, double desconto, Cliente cliente, List<ItemPedido> itens = null)
+       
+
+        public Pedido(double preco, double desconto, Cliente cliente, List<ItemPedido> itens, FrmPagamento frmPagamento)
+        {
+            Preco = preco;
+            Desconto = desconto;
+            Cliente = cliente;
+            Itens = itens;
+            FrmPagamento = frmPagamento;
+        }
+
+        public Pedido(int id, double preco, double desconto, Cliente cliente, List<ItemPedido> itens, FrmPagamento frmPagamento)
         {
             Id = id;
             Preco = preco;
             Desconto = desconto;
             Cliente = cliente;
             Itens = itens;
+            FrmPagamento = frmPagamento;
         }
+
         public void Inserir()
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = "insert pedidos (preco, desconto, cliente_id)" +
-                              "values(preco, 0, @client);";
-
+            cmd.CommandText = "insert pedidos (preco, desconto, cliente_id,itempedido_id,frmpagamento_id)" + "values (preco, 0, @client,@itempedido,@frmpagamento);";
+             
             cmd.Parameters.Add("@client", MySqlDbType.Int32).Value = Cliente.Id;
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
@@ -54,7 +67,7 @@ namespace Zoneclass
         {
             List<Pedido> list = new List<Pedido>();
             var cmd = Banco.Abrir();
-            cmd.CommandText = "select * from pedidos where arquivado_em is null order by id desc;";
+            cmd.CommandText = "select * from pedidos where arquivado is null order by id desc;";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -63,7 +76,8 @@ namespace Zoneclass
                     dr.GetDouble(1),
                     dr.GetDouble(2),
                     Cliente.ObterPorId(dr.GetInt32(3)),
-                    ItemPedido.Listar(dr.GetInt32(4))
+                    ItemPedido.Listar(dr.GetInt32(4)),
+            // Continuação
                     )
                     );
             }

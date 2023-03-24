@@ -15,43 +15,54 @@ namespace Zoneclass
         public string Descricao { get; set; }
         public string Resumo { get; set; }
         public double Preco { get; set; }
-        public string Image { get; set; }
         public string Destaque { get; set; }
         public double Desconto { get; set; }
+        public Tipos Tipos { get; set; }
 
         //Métodos construtores 
         public Produtos() { }
-        public Produtos(int id, string titulo, string descricao, string resumo, double preco, string image, string destaque, double desconto)
+
+        public Produtos(int id, string titulo, string descricao, string resumo, double preco, string destaque, double desconto)
         {
             Id = id;
             Titulo = titulo;
             Descricao = descricao;
             Resumo = resumo;
             Preco = preco;
-            Image = image;
             Destaque = destaque;
             Desconto = desconto;
         }
 
-        public Produtos(string titulo, string descricao, string resumo, double preco, string image, string destaque, double desconto)
-        {      
+        public Produtos(string titulo, string descricao, string resumo, double preco, string destaque, double desconto)
+        {
             Titulo = titulo;
             Descricao = descricao;
             Resumo = resumo;
             Preco = preco;
-            Desconto = desconto;
-            Image= image;
             Destaque = destaque;
             Desconto = desconto;
         }
 
+        public Produtos(int id, string titulo, string descricao, string resumo, double preco, string destaque, double desconto, Tipos tipos)
+        {
+            Id = id;
+            Titulo = titulo;
+            Descricao = descricao;
+            Resumo = resumo;
+            Preco = preco;
+            Destaque = destaque;
+            Desconto = desconto;
+            Tipos = tipos;
+        }
+
+
         // Métodos da classe
-        public void Inserir()
+        public void Inserir(int tipo_id)
         {
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "insert Produtos (titulo, descricao, resumo, preco, image, destaque, desconto) " +
-                "values ('" + Titulo + "','" + Descricao + "','" + Resumo + "'," + Preco + "," + Image + "," + Destaque + "," + Desconto + ")";
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "insert Produtos (titulo, descricao, resumo, preco, destaque, desconto, tipo_id) " +
+                "values ('" + Titulo + "','" + Descricao + "','" + Resumo + "','" + Preco + "','" + Destaque + "','" + Desconto + "',"+ tipo_id + ";)";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
@@ -62,7 +73,7 @@ namespace Zoneclass
 
             List<Produtos> lista = new List<Produtos>();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandType = CommandType.Text;
             cmd.CommandText = "select * from Produtos order by descricao asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -74,8 +85,8 @@ namespace Zoneclass
                     dr.GetString(3),
                     dr.GetDouble(4),
                     dr.GetString(5),
-                    dr.GetString(6),
-                    dr.GetDouble(7)
+                    dr.GetDouble(6),
+                    Tipos.ObterPorId(dr.GetInt32(7))
                     )
                 );
             }
@@ -86,7 +97,7 @@ namespace Zoneclass
         {
             Produtos Produtos = new Produtos();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandType = CommandType.Text;
             cmd.CommandText = "select * from Produtos where id = " + id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -96,9 +107,9 @@ namespace Zoneclass
                 Produtos.Descricao = dr.GetString(2);
                 Produtos.Resumo = dr.GetString(3);
                 Produtos.Preco = dr.GetDouble(4);
-                Produtos.Image = dr.GetString(5);
-                Produtos.Destaque = dr.GetString(6);
-                Produtos.Desconto = dr.GetDouble(7);
+                Produtos.Destaque = dr.GetString(5);
+                Produtos.Desconto = dr.GetDouble(6);
+                Produtos.Tipos = Tipos.ObterPorId(dr.GetInt32(7));
             }
 
             return Produtos;
@@ -108,8 +119,7 @@ namespace Zoneclass
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "update Produtos set titulo = '" + Titulo + "'," +
-                "descricao = '" + Descricao + "', resumo = '" + Resumo + "', preco = " + Preco + ", image = " + Image + " , destaque = " + Destaque + " " + " , desconto = " + Desconto +
-                "where id = " + Id;
+                "descricao = '" + Descricao + "', resumo = '" + Resumo + "', preco = " + Preco + ", destaque = " + Destaque + " , desconto = " + Desconto +", "+Tipos+" where id = " + Id;
             cmd.ExecuteReader();
         }
         public static bool Arquivar(int id) // arquivando
@@ -144,8 +154,8 @@ namespace Zoneclass
                 dr.GetString(3),
                 dr.GetDouble(4),
                 dr.GetString(5),
-                dr.GetString(6),
-                dr.GetDouble(7)
+                dr.GetDouble(6),
+                Tipos.ObterPorId(dr.GetInt32(7))
                     )
                 );
             }

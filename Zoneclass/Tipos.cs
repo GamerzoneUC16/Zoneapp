@@ -32,7 +32,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert tipos (nome, sigla) values ('" + Sigla + "','" + Rotulo + "')";
+            cmd.CommandText = "insert tipos (sigla, rotulo) values ('" + Sigla + "','" + Rotulo + "')";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
@@ -42,8 +42,8 @@ namespace Zoneclass
         {
             List<Tipos> lista = new List<Tipos>();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "select * from tipos order by nome asc";
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "select * from tipos order by rotulo asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -60,7 +60,7 @@ namespace Zoneclass
         {
             Tipos tipos = new Tipos();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandType = CommandType.Text;
             cmd.CommandText = "select * from tipos where id = " + _id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -76,8 +76,8 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "update niveis set nome = '" +
-                tipos.Rotulo + "', sigla = '" + tipos.Sigla +
+            cmd.CommandText = "update tipos set sigla = '" +
+                tipos.Sigla + "', rotulo = '" + tipos.Rotulo +
                  "' where id = " + tipos.Id;
             cmd.ExecuteReader();
         }
@@ -89,11 +89,11 @@ namespace Zoneclass
             bool result = cmd.ExecuteNonQuery() == 1 ? true : false;
             return result;
         }
-        public static List<Tipos> BuscarPorNome(string _parte)
+        public static List<Tipos> BuscarPorRotulo(string _parte)
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from tipos where nome like '%" + _parte + "%' order by nome;";
+            cmd.CommandText = "select * from tipos where rotulo like '%" + _parte + "%' order by rotulo;";
             var dr = cmd.ExecuteReader();
             List<Tipos> lista = new List<Tipos>();
             while (dr.Read())
