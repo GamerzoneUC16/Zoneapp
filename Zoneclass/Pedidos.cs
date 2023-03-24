@@ -16,7 +16,8 @@ namespace Zoneclass
         public double Desconto { get; set; }
         public Cliente Cliente { get; set; }
         public List<ItemPedido> Itens { get; set; }
-        public FrmPagamento FrmPagamento { get; set; }  
+        public FrmPagamento FrmPagamento { get; set; } 
+        public DateTime Arquivado { get; set; }
 
         public Pedido()
         {
@@ -30,18 +31,7 @@ namespace Zoneclass
             Cliente = cliente;
         }
 
-       
-
-        public Pedido(double preco, double desconto, Cliente cliente, List<ItemPedido> itens, FrmPagamento frmPagamento)
-        {
-            Preco = preco;
-            Desconto = desconto;
-            Cliente = cliente;
-            Itens = itens;
-            FrmPagamento = frmPagamento;
-        }
-
-        public Pedido(int id, double preco, double desconto, Cliente cliente, List<ItemPedido> itens, FrmPagamento frmPagamento)
+        public Pedido(int id, double preco, double desconto, Cliente cliente, List<ItemPedido> itens, FrmPagamento frmPagamento, DateTime arquivado)
         {
             Id = id;
             Preco = preco;
@@ -49,14 +39,27 @@ namespace Zoneclass
             Cliente = cliente;
             Itens = itens;
             FrmPagamento = frmPagamento;
+            Arquivado = arquivado;
+        }
+
+        public Pedido(double preco, double desconto, Cliente cliente, List<ItemPedido> itens, FrmPagamento frmPagamento, DateTime arquivado)
+        {
+            Preco = preco;
+            Desconto = desconto;
+            Cliente = cliente;
+            Itens = itens;
+            FrmPagamento = frmPagamento;
+            Arquivado = arquivado;
+
         }
 
         public void Inserir()
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = "insert pedidos (preco, desconto, cliente_id,itempedido_id,frmpagamento_id)" + "values (preco, 0, @client,@itempedido,@frmpagamento);";
+            cmd.CommandText = "insert pedidos (preco, desconto, cliente, itens, frmpagamento, arquivado)" + 
+                "values (preco, 0, @cliente, @itens, @frmpagamento, arquivado);";
              
-            cmd.Parameters.Add("@client", MySqlDbType.Int32).Value = Cliente.Id;
+            cmd.Parameters.Add("@cliente", MySqlDbType.Int32).Value = Cliente.Id;
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
@@ -77,17 +80,35 @@ namespace Zoneclass
                     dr.GetDouble(2),
                     Cliente.ObterPorId(dr.GetInt32(3)),
                     ItemPedido.Listar(dr.GetInt32(4)),
-            // Continuação
-                    )
-                    );
+                    FrmPagamento.ObterPorId(dr.GetInt32(5)),
+                    dr.GetDateTime(6)));
             }
             return list;
         }
+        public static Pedido ObterPorId(int id)
+                {
+                    Pedido pedido = new Pedido();
+                    var cmd = Banco.Abrir();
+                    cmd.CommandText = "select * from pedidos where id=" + id;
+                    var dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        pedido.Id = dr.GetInt32(0);
+                        pedido.Preco = dr.GetDouble(1);
+                        pedido.Desconto = dr.GetDouble(2);
+                        pedido.Cliente = Cliente.ObterPorId(dr.GetInt32(3));            
+                        pedido.Itens = ItemPedido.Listar(dr.GetInt32(4));
+                pedido.FrmPagamento = FrmPagamento.ObterPorId(dr.GetInt32(5));
+                        pedido.Arquivado = dr.GetDateTime(6);
+                    }
+
+                    return pedido;
+                }
         public static List<Pedido> Arquivados(int a = 0)
         {
             List<Pedido> list = new List<Pedido>();
             var cmd = Banco.Abrir();
-            cmd.CommandText = "select * from pedidos where arquivado_em is not null order by arquivado_em desc;";
+            cmd.CommandText = "select * from pedidos where arquivado is not null order by arquivado desc;";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -96,28 +117,11 @@ namespace Zoneclass
                     dr.GetDouble(1),
                     dr.GetDouble(2),
                     Cliente.ObterPorId(dr.GetInt32(3)),
-                    ItemPedido.Listar(dr.GetInt32(4))
-                    )
-                    );
+                    ItemPedido.Listar(dr.GetInt32(4)),
+                    FrmPagamento.ObterPorId(dr.GetInt32(5)),
+                    dr.GetDateTime(6)));
             }
             return list;
-        }
-        public static Pedido ObterPorId(int id)
-        {
-            Pedido pedido = new Pedido();
-            var cmd = Banco.Abrir();
-            cmd.CommandText = "select * from pedidos where id=" + id;
-            var dr = cmd.ExecuteReader();
-            while (dr.Read())
-            {
-                pedido.Id = dr.GetInt32(0);
-                pedido.Preco = dr.GetDouble(1);
-                pedido.Desconto = dr.GetDouble(2);
-                pedido.Cliente = Cliente.ObterPorId(dr.GetInt32(3));            
-                pedido.Itens = ItemPedido.Listar(dr.GetInt32(4));
-            }
-
-            return pedido;
         }
         public void Atualizar()
         {
@@ -142,9 +146,5 @@ namespace Zoneclass
             cmd.CommandText = "update pedidos set arquivado_em = null where id =  " + id;
             cmd.ExecuteNonQuery();
         }
-        //public double ObterTotal() 
-        //{
-
-        //}
     }
 }

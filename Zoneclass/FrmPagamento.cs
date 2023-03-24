@@ -39,10 +39,10 @@ namespace Zoneclass
         public static List<FrmPagamento> Listar() 
         { 
             List<FrmPagamento> lista = new List<FrmPagamento>();
-            var cmd = Banco.Abrir()
+            var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "select * from frmpagamento order by tipo asc";
-            var dr = cmd.ExecuteNonQuery();
+            var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                 lista.Add(new FrmPagamento(
@@ -53,19 +53,19 @@ namespace Zoneclass
         }
         public static FrmPagamento ObterPorId (int id)
         {
-            FrmPagamento frmpagamento lista = new FrmPagamento();
-            var cmd = Banco.Abrir()
+            FrmPagamento frmpagamento = new FrmPagamento();
+            var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "select * from frmpagamento where id " + id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                frmpagamento.Id = dr.GetInt32(0);
-               frmpagamento.Tipo dr.GetString(1);
+               frmpagamento.Tipo = dr.GetString(1);
             }
-            return FrmPagamento;
+            return frmpagamento;
         }
-        public void Atualizar (FrmPagamento frmpagamento)
+        public static void Atualizar (FrmPagamento frmpagamento)
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;

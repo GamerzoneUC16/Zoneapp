@@ -16,13 +16,14 @@ namespace Zoneclass
         public string Anexo { get; set; }
         public string Status { get; set; }
         public DateTime Data { get ; set; }
+        public string Hashcode { get; set; }
         public Cliente Cliente { get; set; }
         public Usuario Usuario { get; set; }
         public DateTime Data_Final { get; set; }
 
         public Chamados () { }
        
-        public Chamados(int id, string titulo, string motivo, string assunto, string anexo, string status, DateTime data, Cliente cliente, Usuario usuario, DateTime data_final)
+        public Chamados(int id, string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_final)
         {
             Id = id;
             Titulo = titulo;
@@ -31,12 +32,13 @@ namespace Zoneclass
             Anexo = anexo;
             Status = status;
             Data = data;
+            Hashcode = Hashcode;
             Cliente = cliente;
             Usuario = usuario;
             Data_Final = data_final;
         }
 
-        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data, Cliente cliente, Usuario usuario, DateTime data_final)
+        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_final)
         {
             Titulo = titulo;
             Motivo = motivo;
@@ -44,6 +46,7 @@ namespace Zoneclass
             Anexo = anexo;
             Status = status;
             Data = data;
+            Hashcode = Hashcode;
             Cliente = cliente;
             Usuario = usuario;
             Data_Final = data_final;
@@ -53,11 +56,16 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert chamados (titulo, motivo, assunto, anexo, status, data, cliente, usuario, data_final) " +
-                "values ('" + Titulo + "','" + Motivo + "','" + Assunto + "','" + Anexo + "','" + Status + "','" + Data +"','" + Cliente + "','" + Usuario + "','" + Data_Final + "')";
+            cmd.CommandText = "insert chamados (titulo, motivo, assunto, anexo, status, data, hashcode, cliente, usuario, data_final) " +
+                "values ('" + Titulo + "','" + Motivo + "','" + Assunto + "','" + Anexo + "','" + Status + "','" + Data +"','" + Hashcode + "','" + Cliente + "','" + Usuario + "','" + Data_Final + "')";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "selectt @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
+            Random rand = new Random();
+            string hash = "GZH" + Id + rand.Next(01, 1000);
+            Hashcode = hash;
+            cmd.CommandText = "update chamados set hashcode = '" + hash + "' where id =" + Id;
+            cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
         public List<Chamados> Listar()
@@ -77,9 +85,10 @@ namespace Zoneclass
                     dr.GetString(4),
                     dr.GetString(5),
                     dr.GetDateTime(6),
-                    Cliente.ObterPorId(dr.GetInt32(7)),   
-                    Usuario.ObterPorId(dr.GetInt32(8)),
-                    dr.GetDateTime(9)));
+                    dr.GetString(7),
+                    Cliente.ObterPorId(dr.GetInt32(8)),   
+                    Usuario.ObterPorId(dr.GetInt32(9)),
+                    dr.GetDateTime(10)));
             }
             return lista;
         }
@@ -99,9 +108,10 @@ namespace Zoneclass
                 chamados.Anexo = dr.GetString(4);
                 chamados.Status = dr.GetString(5);
                 chamados.Data = dr.GetDateTime(6);
-                chamados.Cliente = Cliente.ObterPorId(dr.GetInt32(7));
-                chamados.Usuario = Usuario.ObterPorId(dr.GetInt32(8));
-                chamados.Data_Final = dr.GetDateTime(9);
+                chamados.Hashcode = dr.GetString(7);
+                chamados.Cliente = Cliente.ObterPorId(dr.GetInt32(8));
+                chamados.Usuario = Usuario.ObterPorId(dr.GetInt32(9));
+                chamados.Data_Final = dr.GetDateTime(10);
             }
             return chamados;
         }
