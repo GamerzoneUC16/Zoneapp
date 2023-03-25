@@ -97,6 +97,7 @@
     <Compile Include="Funcionario.cs" />
     <Compile Include="Images.cs" />
     <Compile Include="ItemPedido.cs" />
+    <Compile Include="Nivel.cs" />
     <Compile Include="Pedidos.cs" />
     <Compile Include="Produtos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
