@@ -17,7 +17,7 @@ namespace Zoneapp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmService());
+            Application.Run(new FrmChamados());
         }
     }
 }

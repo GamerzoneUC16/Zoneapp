@@ -32,13 +32,13 @@ namespace Zoneclass
             Anexo = anexo;
             Status = status;
             Data = data;
-            Hashcode = Hashcode;
+            Hashcode = hashcode;
             Cliente = cliente;
             Usuario = usuario;
             Data_Final = data_final;
         }
 
-        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_final)
+        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data,string, string hashcode, Cliente cliente, Usuario usuario, DateTime data_final)
         {
             Titulo = titulo;
             Motivo = motivo;
@@ -46,7 +46,7 @@ namespace Zoneclass
             Anexo = anexo;
             Status = status;
             Data = data;
-            Hashcode = Hashcode;
+            Hashcode = hashcode;
             Cliente = cliente;
             Usuario = usuario;
             Data_Final = data_final;
@@ -68,7 +68,7 @@ namespace Zoneclass
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
-        public List<Chamados> Listar()
+        public static List<Chamados> Listar()
         {
             List<Chamados> lista = new List<Chamados>();
             var cmd = Banco.Abrir();
@@ -132,6 +132,7 @@ namespace Zoneclass
             bool result = cmd.ExecuteNonQuery() == 1 ? true : false;
             return result;
         }
+
     }
     
 

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoneapp", "Zoneapp\Zoneapp.csproj", "{54E25DA9-525E-434A-A064-F76CDE108E20}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6342D0C2-FE0C-422E-BCE7-B650A0EB6755} = {6342D0C2-FE0C-422E-BCE7-B650A0EB6755}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoneclass", "Zoneclass\Zoneclass.csproj", "{6342D0C2-FE0C-422E-BCE7-B650A0EB6755}"
 EndProject

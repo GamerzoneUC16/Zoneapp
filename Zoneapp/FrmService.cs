@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Zoneclass;
 namespace Zoneapp
 {
     public partial class FrmService : Form
@@ -17,9 +17,5 @@ namespace Zoneapp
             InitializeComponent();
         }
 
-        private void txtNomeCliente_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
     }
 }
