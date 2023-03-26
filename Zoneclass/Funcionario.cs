@@ -13,30 +13,30 @@ namespace Zoneclass
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Cpf { get; set; }
-        public Nivel Nivel { get; set; }
+        public Niveis Niveis { get; set; }
 
         public Funcionario () { }
-            public Funcionario(int id, string nome, string email, string cpf, Nivel nivel)
+            public Funcionario(int id, string nome, string email, string cpf, Niveis niveis)
             {
                 Id = id;
                 Nome = nome;
                 Email = email;
                 Cpf = cpf;
-                Nivel = nivel;
+                Niveis = niveis;
             }
-            public Funcionario (string nome, string email, string cpf, Nivel nivel) 
+            public Funcionario (string nome, string email, string cpf, Niveis niveis) 
             {
                 Nome = nome;
                 Email = email;
                 Cpf = cpf;
-                Nivel = nivel;
+                Niveis = niveis;
             }
             public void Inserir()
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert funcionario (nome, email, cpf, nivel_id) " +
-                "values ('" + Nome + "','" + Email + "','" + Cpf + "','" + Nivel +"')";
+            cmd.CommandText = "insert funcionario (nome, email, cpf, Niveis_id) " +
+                "values ('" + Nome + "','" + Email + "','" + Cpf + "','" + Niveis +"')";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
             Id = Convert.ToInt32(cmd.ExecuteScalar());
@@ -56,7 +56,7 @@ namespace Zoneclass
                     dr.GetString(1),
                     dr.GetString(2),
                     dr.GetString(3),
-                    Nivel.ObterPorId(dr.GetInt32(4))));
+                    Niveis.ObterPorId(dr.GetInt32(4))));
             }
             return lista;
         }
@@ -73,7 +73,7 @@ namespace Zoneclass
                 funcionario.Nome = dr.GetString(1);
                 funcionario.Email = dr.GetString(2);
                 funcionario.Cpf = dr.GetString(3);
-                funcionario.Nivel = Nivel.ObterPorId(dr.GetInt32(4));
+                funcionario.Niveis = Niveis.ObterPorId(dr.GetInt32(4));
             }
             return funcionario;
         }

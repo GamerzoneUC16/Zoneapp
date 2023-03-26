@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using Zoneclass;
+
 
 namespace Zoneclass
 {
@@ -13,22 +13,26 @@ namespace Zoneclass
     {
         public int Id { get; set; }
         public string Username { get; set; }
+        public string Email { get; set; }
+
         public string Senha { get; set; }
-        public string Nivel { get; set; }
+        public Niveis Nivel { get; set; }
        
         public Usuario() { }
 
-        public Usuario(int id, string username, string senha, string nivel)
+        public Usuario(int id, string username, string email, string senha, Niveis nivel)
         {
             Id = id;
             Username = username;
+            Email = email;
             Senha = senha;
             Nivel = nivel;
         }
 
-        public Usuario(string username, string senha, string nivel)
+        public Usuario(string username, string email, string senha, Niveis nivel)
         {
             Username = username;
+            Email = email;
             Senha = senha;
             Nivel = nivel;
         }
@@ -44,12 +48,12 @@ namespace Zoneclass
             Id = Convert.ToInt32(cmd.ExecuteScalar());
             cmd.Connection.Close();
         }
-        public static List<Usuario> Listar()
+        public static List<Usuario> Listar(int nivel)
         {
             List<Usuario> lista = new List<Usuario>();
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from usuarios order by username asc";
+            cmd.CommandText = "select * from usuarios where nivel_id ="+ nivel;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -57,7 +61,10 @@ namespace Zoneclass
                     dr.GetInt32(0),
                     dr.GetString(1),
                     dr.GetString(2),
-                    dr.GetString(3)));
+                    dr.GetString(3),
+                    Niveis.ObterPorId(dr.GetInt32(4))));
+                    
+                    
             }
             return lista;
         }
@@ -72,8 +79,9 @@ namespace Zoneclass
             {
                 usuario.Id = dr.GetInt32(0);
                 usuario.Username = dr.GetString(1);
-                usuario.Senha = dr.GetString(2);
-                usuario.Nivel = dr.GetString(4);
+                usuario.Email = dr.GetString(2);
+                usuario.Senha = dr.GetString(3);
+                usuario.Nivel =Niveis.ObterPorId(dr.GetInt32(4));
             }
             return usuario;
         }
@@ -107,7 +115,8 @@ namespace Zoneclass
                     dr.GetInt32(0),
                     dr.GetString(1),
                     dr.GetString(2),
-                    dr.GetString(3)));
+                    dr.GetString(3),
+                    Niveis.ObterPorId(dr.GetInt32(4))));
             }
             return lista;
         }

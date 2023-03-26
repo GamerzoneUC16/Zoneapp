@@ -9,19 +9,19 @@ using Zoneclass;
 
 namespace Zoneclass
 {
-    public class Nivel
+    public class Niveis
     {
         public int Id { get; set; }
         public string Sigla { get; set; }
         public string Rotulo { get; set; }
 
-        public Nivel() { }
-        public Nivel(string _sigla, string _rotulo)
+        public Niveis() { }
+        public Niveis(string _sigla, string _rotulo)
         {
             Sigla = _sigla;
             Rotulo = _rotulo;
         }
-        public Nivel(int _id, string _sigla, string _rotulo)
+        public Niveis(int _id, string _sigla, string _rotulo)
         {
             Id = _id;
             Sigla = _sigla;
@@ -38,17 +38,17 @@ namespace Zoneclass
             Id = Convert.ToInt32(cmd.ExecuteScalar());
 
         }
-        public static List<Nivel> Listar()
+        public static List<Niveis> Listar()
         {
 
-            List<Nivel> lista = new List<Nivel>();
+            List<Niveis> lista = new List<Niveis>();
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = "select * from niveis order by nome asc";
+            cmd.CommandText = "select * from niveis order by rotulo asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                lista.Add(new Nivel(
+                lista.Add(new Niveis(
                     dr.GetInt32(0),
                     dr.GetString(1),
                     dr.GetString(2)
@@ -57,29 +57,29 @@ namespace Zoneclass
             }
             return lista;
         }
-        public static Nivel ObterPorId(int _id)
+        public static Niveis ObterPorId(int _id)
         {
-            Nivel nivel = new Nivel();
+            Niveis Niveis = new Niveis();
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "select * from niveis where id = " + _id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                nivel.Id = dr.GetInt32(0);
-                nivel.Sigla = dr.GetString(1);
-                nivel.Rotulo = dr.GetString(2);
+                Niveis.Id = dr.GetInt32(0);
+                Niveis.Sigla = dr.GetString(1);
+                Niveis.Rotulo = dr.GetString(2);
             }
 
-            return nivel;
+            return Niveis;
         }
-        public static void Atualizar(Nivel nivel)
+        public static void Atualizar(Niveis Niveis)
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "update niveis set nome = '" +
-                nivel.Rotulo + "', sigla = '" + nivel.Sigla +
-                 "' where id = " + nivel.Id;
+                Niveis.Rotulo + "', sigla = '" + Niveis.Sigla +
+                 "' where id = " + Niveis.Id;
             cmd.ExecuteReader();
         }
         public bool Excluir(int _id)
@@ -90,16 +90,16 @@ namespace Zoneclass
             bool result = cmd.ExecuteNonQuery() == 1 ? true : false;
             return result;
         }
-        public static List<Nivel> BuscarPorNome(string _parte)
+        public static List<Niveis> BuscarPorNome(string _parte)
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "select * from niveis where nome like '%" + _parte + "%' or email like '%" + _parte + "%' order by nome;";
             var dr = cmd.ExecuteReader();
-            List<Nivel> lista = new List<Nivel>();
+            List<Niveis> lista = new List<Niveis>();
             while (dr.Read())
             {
-                lista.Add(new Nivel(
+                lista.Add(new Niveis(
                         dr.GetInt32(0),
                         dr.GetString(1),
                         dr.GetString(2)));

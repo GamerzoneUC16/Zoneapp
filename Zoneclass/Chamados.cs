@@ -22,8 +22,8 @@ namespace Zoneclass
         public DateTime Data_Final { get; set; }
 
         public Chamados () { }
-       
-        public Chamados(int id, string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_final)
+
+        public Chamados(int id, string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_Final)
         {
             Id = id;
             Titulo = titulo;
@@ -35,10 +35,10 @@ namespace Zoneclass
             Hashcode = hashcode;
             Cliente = cliente;
             Usuario = usuario;
-            Data_Final = data_final;
+            Data_Final = data_Final;
         }
 
-        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data,string, string hashcode, Cliente cliente, Usuario usuario, DateTime data_final)
+        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_Final)
         {
             Titulo = titulo;
             Motivo = motivo;
@@ -49,7 +49,7 @@ namespace Zoneclass
             Hashcode = hashcode;
             Cliente = cliente;
             Usuario = usuario;
-            Data_Final = data_final;
+            Data_Final = data_Final;
         }
 
         public void Inserir()
@@ -72,7 +72,7 @@ namespace Zoneclass
         {
             List<Chamados> lista = new List<Chamados>();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandType = CommandType.Text;
             cmd.CommandText = "select * from chamados order by titulo asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
@@ -90,6 +90,7 @@ namespace Zoneclass
                     Usuario.ObterPorId(dr.GetInt32(9)),
                     dr.GetDateTime(10)));
             }
+            dr.Close();
             return lista;
         }
         public static Chamados ObterPorId(int id)
