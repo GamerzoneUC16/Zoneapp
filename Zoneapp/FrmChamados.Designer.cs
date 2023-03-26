@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmChamados));
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.dtgLista = new System.Windows.Forms.DataGridView();
             this.clnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,6 +42,8 @@
             this.clnCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnDataFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtgLista)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +62,7 @@
             this.clnCliente,
             this.clnUsuario,
             this.clnDataFinal});
-            this.dtgLista.Location = new System.Drawing.Point(21, 43);
+            this.dtgLista.Location = new System.Drawing.Point(22, 94);
             this.dtgLista.Name = "dtgLista";
             this.dtgLista.RowHeadersVisible = false;
             this.dtgLista.RowHeadersWidth = 62;
@@ -155,17 +158,42 @@
             this.clnDataFinal.Name = "clnDataFinal";
             this.clnDataFinal.ReadOnly = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(439, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label2.Location = new System.Drawing.Point(378, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(206, 24);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "LISTA DE CHAMADOS";
+            // 
             // FrmChamados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1014, 560);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dtgLista);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmChamados";
             this.Text = "FrmServices";
             this.Load += new System.EventHandler(this.FrmChamados_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dtgLista)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -183,5 +211,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnUsuario;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnDataFinal;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
