@@ -17,19 +17,6 @@ namespace Zoneclass
 
         public Telefone() { }
 
-        public Telefone(int id, string numero, string tipo)
-        {
-            Id = id;
-            Numero = numero;
-            Tipo = tipo;
-        }
-
-        public Telefone(string numero, string tipo)
-        {
-            Numero = numero;
-            Tipo = tipo;
-        }
-
         public Telefone(int id, string numero, string tipo, Cliente cliente)
         {
             Id = id;
@@ -38,10 +25,17 @@ namespace Zoneclass
             Cliente = cliente;
         }
 
+        public Telefone(string numero, string tipo, Cliente cliente)
+        {
+            Numero = numero;
+            Tipo = tipo;
+            Cliente = cliente;
+        }
+
         public void Inserir(int cliente_id)
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = "insert telefones (numero_tel,,tipo_tel,cliente_id) " +
+            cmd.CommandText = "insert telefone (numero_tel,,tipo_tel,cliente_id) " +
                 "values ('" + Numero + "', '" + Tipo + "'," + cliente_id +")";
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
@@ -50,7 +44,7 @@ namespace Zoneclass
         {
             List<Telefone> listaTel = new List<Telefone>();
             var cmd = Banco.Abrir();
-            cmd.CommandText = "select id, numero_tel, tipo_tel from telefones where cliente_id = " + cliente_id;
+            cmd.CommandText = "select id, numero_tel, tipo_tel from telefone where cliente_id = " + cliente_id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {

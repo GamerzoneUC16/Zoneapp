@@ -22,27 +22,6 @@ namespace Zoneclass
         //Métodos construtores 
         public Produtos() { }
 
-        public Produtos(int id, string titulo, string descricao, string resumo, double preco, string destaque, double desconto)
-        {
-            Id = id;
-            Titulo = titulo;
-            Descricao = descricao;
-            Resumo = resumo;
-            Preco = preco;
-            Destaque = destaque;
-            Desconto = desconto;
-        }
-
-        public Produtos(string titulo, string descricao, string resumo, double preco, string destaque, double desconto)
-        {
-            Titulo = titulo;
-            Descricao = descricao;
-            Resumo = resumo;
-            Preco = preco;
-            Destaque = destaque;
-            Desconto = desconto;
-        }
-
         public Produtos(int id, string titulo, string descricao, string resumo, double preco, string destaque, double desconto, Tipos tipos)
         {
             Id = id;
@@ -55,13 +34,23 @@ namespace Zoneclass
             Tipos = tipos;
         }
 
+        public Produtos(string titulo, string descricao, string resumo, double preco, string destaque, double desconto, Tipos tipos)
+        {
+            Titulo = titulo;
+            Descricao = descricao;
+            Resumo = resumo;
+            Preco = preco;
+            Destaque = destaque;
+            Desconto = desconto;
+            Tipos = tipos;
+        }
 
         // Métodos da classe
         public void Inserir(int tipo_id)
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert Produtos (titulo, descricao, resumo, preco, destaque, desconto, tipo_id) " +
+            cmd.CommandText = "insert produtos (titulo, descricao, resumo, preco, destaque, desconto, tipo_id) " +
                 "values ('" + Titulo + "','" + Descricao + "','" + Resumo + "','" + Preco + "','" + Destaque + "','" + Desconto + "',"+ tipo_id + ";)";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
@@ -70,11 +59,10 @@ namespace Zoneclass
         }
         public static List<Produtos> Listar()
         {
-
             List<Produtos> lista = new List<Produtos>();
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from Produtos order by descricao asc";
+            cmd.CommandText = "select * from produtos order by descricao asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -98,7 +86,7 @@ namespace Zoneclass
             Produtos Produtos = new Produtos();
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from Produtos where id = " + id;
+            cmd.CommandText = "select * from produtos where id = " + id;
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -118,7 +106,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "update Produtos set titulo = '" + Titulo + "'," +
+            cmd.CommandText = "update produtos set titulo = '" + Titulo + "'," +
                 "descricao = '" + Descricao + "', resumo = '" + Resumo + "', preco = " + Preco + ", destaque = " + Destaque + " , desconto = " + Desconto +", "+Tipos+" where id = " + Id;
             cmd.ExecuteReader();
         }
@@ -126,7 +114,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "update Produtos set descontinuado = 1 where id = " + id;
+            cmd.CommandText = "update produtos set descontinuado = 1 where id = " + id;
             return cmd.ExecuteNonQuery() == 1 ? true : false;
 
         }
@@ -134,7 +122,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "update Produtos set descontinuado = 0 where id = " + id;
+            cmd.CommandText = "update produtos set descontinuado = 0 where id = " + id;
             return cmd.ExecuteNonQuery() == 1 ? true : false;
 
         }
@@ -142,7 +130,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from Produtos where titulo like '%" + _parte + "%' order by nome;";
+            cmd.CommandText = "select * from produtos where titulo like '%" + _parte + "%' order by nome;";
             var dr = cmd.ExecuteReader();
             List<Produtos> lista = new List<Produtos>();
             while (dr.Read())
