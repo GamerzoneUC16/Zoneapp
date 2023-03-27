@@ -16,11 +16,11 @@ namespace Zoneclass
         public string Email { get; set; }
 
         public string Senha { get; set; }
-        public Niveis Nivel { get; set; }
+        public Nivel Nivel { get; set; }
        
         public Usuario() { }
 
-        public Usuario(int id, string username, string email, string senha, Niveis nivel)
+        public Usuario(int id, string username, string email, string senha, Nivel nivel)
         {
             Id = id;
             Username = username;
@@ -29,7 +29,7 @@ namespace Zoneclass
             Nivel = nivel;
         }
 
-        public Usuario(string username, string email, string senha, Niveis nivel)
+        public Usuario(string username, string email, string senha, Nivel nivel)
         {
             Username = username;
             Email = email;
@@ -62,7 +62,7 @@ namespace Zoneclass
                     dr.GetString(1),
                     dr.GetString(2),
                     dr.GetString(3),
-                    Niveis.ObterPorId(dr.GetInt32(4))));
+                    Nivel.ObterPorId(dr.GetInt32(4))));
                     
                     
             }
@@ -81,7 +81,7 @@ namespace Zoneclass
                 usuario.Username = dr.GetString(1);
                 usuario.Email = dr.GetString(2);
                 usuario.Senha = dr.GetString(3);
-                usuario.Nivel =Niveis.ObterPorId(dr.GetInt32(4));
+                usuario.Nivel =Nivel.ObterPorId(dr.GetInt32(4));
             }
             return usuario;
         }
@@ -106,7 +106,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from niveis where username like '%" + _parte + "%';";
+            cmd.CommandText = "select * from Nivel where username like '%" + _parte + "%';";
             var dr = cmd.ExecuteReader();
             List<Usuario> lista = new List<Usuario>();
             while (dr.Read())
@@ -116,7 +116,7 @@ namespace Zoneclass
                     dr.GetString(1),
                     dr.GetString(2),
                     dr.GetString(3),
-                    Niveis.ObterPorId(dr.GetInt32(4))));
+                    Nivel.ObterPorId(dr.GetInt32(4))));
             }
             return lista;
         }

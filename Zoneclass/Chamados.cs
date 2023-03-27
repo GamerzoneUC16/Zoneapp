@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Zoneclass
 {
-    public class Chamados
+    public class Chamado
     {
         public int Id { get; set; }
         public string Titulo { get; set; }
@@ -21,9 +21,9 @@ namespace Zoneclass
         public Usuario Usuario { get; set; }
         public DateTime Data_Final { get; set; }
 
-        public Chamados () { }
+        public Chamado () { }
 
-        public Chamados(int id, string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_Final)
+        public Chamado(int id, string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_Final)
         {
             Id = id;
             Titulo = titulo;
@@ -38,7 +38,7 @@ namespace Zoneclass
             Data_Final = data_Final;
         }
 
-        public Chamados(string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_Final)
+        public Chamado(string titulo, string motivo, string assunto, string anexo, string status, DateTime data, string hashcode, Cliente cliente, Usuario usuario, DateTime data_Final)
         {
             Titulo = titulo;
             Motivo = motivo;
@@ -68,61 +68,61 @@ namespace Zoneclass
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
-        public static List<Chamados> Listar()
+        public static List<Chamado> Listar()
         {
-            List<Chamados> lista = new List<Chamados>();
+            List<Chamado> lista = new List<Chamado>();
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "select * from chamados order by titulo asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                lista.Add(new Chamados(
-                    dr.GetInt32(0),                   
+                lista.Add(new Chamado(dr.GetInt32(0),                   
                     dr.GetString(1),
                     dr.GetString(2),
                     dr.GetString(3),
                     dr.GetString(4),
                     dr.GetString(5),
-                    dr.GetDateTime(6),
+                    new DateTime(2023,03, 27),
                     dr.GetString(7),
                     Cliente.ObterPorId(dr.GetInt32(8)),   
                     Usuario.ObterPorId(dr.GetInt32(9)),
-                    dr.GetDateTime(10)));
+                  new DateTime(20, 03, 27))
+                  );
             }
             dr.Close();
             return lista;
         }
-        public static Chamados ObterPorId(int id)
+        public static Chamado ObterPorId(int id)
         {
-            Chamados chamados = new Chamados();
+            Chamado Chamado = new Chamado();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandType = CommandType.Text;
             cmd.CommandText = "select * from chamados where id = " + id;
             var dr = cmd.ExecuteReader();
             while(dr.Read())
             {
-                chamados.Id = dr.GetInt32(0);
-                chamados.Titulo = dr.GetString(1);
-                chamados.Motivo = dr.GetString(2);
-                chamados.Assunto = dr.GetString(3);
-                chamados.Anexo = dr.GetString(4);
-                chamados.Status = dr.GetString(5);
-                chamados.Data = dr.GetDateTime(6);
-                chamados.Hashcode = dr.GetString(7);
-                chamados.Cliente = Cliente.ObterPorId(dr.GetInt32(8));
-                chamados.Usuario = Usuario.ObterPorId(dr.GetInt32(9));
-                chamados.Data_Final = dr.GetDateTime(10);
+                Chamado.Id = dr.GetInt32(0);
+                Chamado.Titulo = dr.GetString(1);
+                Chamado.Motivo = dr.GetString(2);
+                Chamado.Assunto = dr.GetString(3);
+                Chamado.Anexo = dr.GetString(4);
+                Chamado.Status = dr.GetString(5);
+                Chamado.Data = dr.GetDateTime(6);
+                Chamado.Hashcode = dr.GetString(7);
+                Chamado.Cliente = Cliente.ObterPorId(dr.GetInt32(8));
+                Chamado.Usuario = Usuario.ObterPorId(dr.GetInt32(9));
+                Chamado.Data_Final = dr.GetDateTime(10);
             }
-            return chamados;
+            return Chamado;
         }
-        public static void Atualizar (Chamados chamados)
+        public static void Atualizar (Chamado Chamado)
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = "update chamados set titulo = '" +
-                chamados.Titulo + "', assunto = '" + chamados.Assunto +
-                "' where id = " + chamados.Id;
+                Chamado.Titulo + "', assunto = '" + Chamado.Assunto +
+                "' where id = " + Chamado.Id;
             cmd.ExecuteReader();
         }
         public bool Excluir (int id)
