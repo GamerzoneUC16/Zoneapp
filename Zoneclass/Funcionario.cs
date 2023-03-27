@@ -35,7 +35,7 @@ namespace Zoneclass
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert funcionario (nome, email, cpf, Niveis_id) " +
+            cmd.CommandText = "insert funcionario (nome, email, cpf, niveis_id) " +
                 "values ('" + Nome + "','" + Email + "','" + Cpf + "','" + Niveis +"')";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
