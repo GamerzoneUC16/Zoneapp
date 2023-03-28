@@ -16,26 +16,26 @@ namespace Zoneclass
         public Nivel Nivel { get; set; }
 
         public Funcionario () { }
-            public Funcionario(int id, string nome, string email, string cpf, Nivel Nivel)
+            public Funcionario(int id, string nome, string email, string cpf, Nivel nivel)
             {
                 Id = id;
                 Nome = nome;
                 Email = email;
                 Cpf = cpf;
-                Nivel = Nivel;
+                Nivel = nivel;
             }
-            public Funcionario (string nome, string email, string cpf, Nivel Nivel) 
+            public Funcionario (string nome, string email, string cpf, Nivel nivel) 
             {
                 Nome = nome;
                 Email = email;
                 Cpf = cpf;
-                Nivel = Nivel;
+                Nivel = nivel;
             }
             public void Inserir()
         {
             var cmd = Banco.Abrir();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "insert funcionario (nome, email, cpf, Nivel_id) " +
+            cmd.CommandText = "insert funcionario (nome, email, cpf, nivel_id) " +
                 "values ('" + Nome + "','" + Email + "','" + Cpf + "','" + Nivel +"')";
             cmd.ExecuteNonQuery();
             cmd.CommandText = "select @@identity";
